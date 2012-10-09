@@ -6,7 +6,10 @@ package mingleplugin;
 // is always String. The property also includes attributes about the property type_description
 // and whether or not it is hidden.
 
-class MingleCardProperty {
+class MingleCardProperty extends MingleObject{
+  
+  private String mingleObjectType = "MingleCardProperty";
+
   private String name;
   private Object value;
   private String type_description;
@@ -27,7 +30,7 @@ class MingleCardProperty {
   }
 
   public void setValue( Object obj ) {
-    if (obj instanceof String || obj instanceof int || obj instanceof Array) { // checks for valid data types. incomplete!
+    if (obj instanceof String || obj instanceof String || obj.class.isAssignableFrom(int.class) || obj instanceof Array) { // checks for valid data types. incomplete!
       this.value = obj;
     }
   }
@@ -52,6 +55,24 @@ class MingleCardProperty {
     this.hidden = hidden;
   }
 
-  // TODO: Constructors
+  // The attributes hidden and type_description are optional
+  MingleCardProperty(String name, Object value, String type_description, boolean hidden) {
+    this.name = name;
+    this.value = value;
+    this.type_description = type_description;
+    this.hidden = hidden;
+  }
+
+  MingleCardProperty(String name, Object value, boolean hidden) {
+    this.name = name;
+    this.value = value;
+    this.hidden = hidden;
+  }
+
+  MingleCardProperty(String name, Object value) {
+    this.name = name;
+    this.value = value;
+    this.hidden = hidden;
+  }
 
 }

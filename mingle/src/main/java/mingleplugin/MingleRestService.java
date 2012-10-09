@@ -30,7 +30,7 @@ public class MingleRestService {
   public final String password;
 
 /**
-* True if this mingle is configured to allow Confluence-style Wiki comment.
+* True if this mingle is configured to allow Confluence-style Wiki comment. Wait? Wat?
 */
   public final boolean supportsWikiStyleComment;
 
@@ -62,10 +62,11 @@ public class MingleRestService {
   }
 
 
-  public MingleObject doMingleCall(URL url, String method = "GET", MingleObject obj = null) {
+  public MingleObject doMingleCall(URL url, String method, MingleObject obj) {
+    if (method == null) method = "GET";
     HttpURLConnection connection = new HttpURLConnection(url);
     // Checks for valid Http method. Mingle supports: GET, POST, PUT or DELETE.
-    if (method === "GET" || method === "POST" || method === "PUT" || method === "DELETE") {
+    if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
       connection.setRequestMethod(method);
     }
     else throw ProtocolException();
@@ -83,7 +84,7 @@ public class MingleRestService {
       }
     }
     // TODO: parse String to XML
-    // TODO: convert XML to some kind of useful MingleCart or MingleSomething-object
+    // TODO: convert XML to some kind of useful MingleCart or MingleSomething-object using XStream!
   }
 
 }
