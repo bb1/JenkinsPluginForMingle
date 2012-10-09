@@ -1,0 +1,5 @@
+<l:dependencies xmlns:l='licenses' groupId='mingle-plugin' artifactId='mingle' version='1.0-SNAPSHOT'>
+  <l:dependency name='mingle' groupId='mingle-plugin' artifactId='mingle' version='1.0-SNAPSHOT' url='http://jenkins-ci.org/plugin/mingle/'>
+    <l:description />
+  </l:dependency>
+</l:dependencies>
