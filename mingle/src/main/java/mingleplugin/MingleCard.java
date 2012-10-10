@@ -105,7 +105,5 @@ class MingleCard extends MingleObject {
     this.tags = tags;
     this.rendered_description = rendered_description;
   }
-
-  //TODO: make it work with XStream http://xstream.codehaus.org/tutorial.html !
   
 }
