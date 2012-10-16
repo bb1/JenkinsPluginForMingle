@@ -14,8 +14,7 @@ class MingleCard extends MingleObject {
   private String description;
   private String cardtype;
   
-  private Map<String, String> project = new HashMap<String, String>(); // project: Resource; name and identifier of a project a card belongs to
-  // not supporting everything: private Map<String, String>[] properties = new HashMap<String, String>()[]; //properties: Array; property: Resource; name and a current value for each card property defined for current card's card type are listed; Data type will depend on the property while property name is always String. The property also includes attributes about the property type_description and whether or not it is hidden.
+  private MingleProject project;
   private MingleCardProperty[] properties;
   private String tags; // comma-delimited list of tags
   private URL rendered_description; // Resource; Link to rendered card description as HTML.
@@ -25,7 +24,7 @@ class MingleCard extends MingleObject {
   private final int version;
   private final Date created_on;
   private final Date modified_on;
-  private final Map<String, Object> created_by = new HashMap<String, Object>(); // created_by: name and login id of user who created the card
+  private final MingleUser created_by;
 
   // getter and setter:
   public String getName()
@@ -78,7 +77,7 @@ class MingleCard extends MingleObject {
   }
 
   // Constructor only with essential constants
-  public MingleCard (int id, int number, int version, created_on,  Date modified_on, Map<String, Object> created_by) {
+  public MingleCard (int id, int number, int version, Date created_on,  Date modified_on, MingleUser created_by) {
     this.id = id;
     this.number = number;
     this.version = version;
@@ -88,8 +87,8 @@ class MingleCard extends MingleObject {
   }
 
   // Constructor with all possible stuff
-  public MingleCard (int id, int number, int version, created_on,  Date modified_on, Map<String, Object> created_by,
-                     String name, String description, String cardtype, Map<String, String> project, MingleCardProperty[] properties, 
+  public MingleCard (int id, int number, int version, Date created_on,  Date modified_on, MingleUser created_by,
+                     String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
                      String tags, URL rendered_description) {
     this.id = id;
     this.number = number;

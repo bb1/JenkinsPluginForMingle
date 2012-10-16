@@ -12,13 +12,14 @@ import java.net.ProtocolException;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
+// TODO: Imports for Input/Output Streams etc.
 
 
 /**
- * Class for the Mingle connection
+ * Class for the Mingle connection using the API v2.
  *
  * @author Birk Brauer
- * @version 0.5
+ * @version 0.6
  */
 public class MingleRestService {
 /**
@@ -108,25 +109,40 @@ public class MingleRestService {
   }
 
 /**
- * Performs a REST call on the mingle server and returns a XML string.
+ * Performs a REST call on the mingle server and returns a XML string if we requested a ressource or a link
+ * if we updated or created a ressource on the Mingle system.
  *
  * @param url URL The url that represents the RESTful url for the mingle server.
  * @param method String method This will set the used HTTP method. Only GET, POST, PUT or DELETE are supported.
- * @param obj MingleObject
+ * @param xml String A string that represents a MingleObject in XML form.
  * 
- * @return String XML object that can be parsed as a MingleObject.
+ * @return String XML object that can be parsed as a MingleObject if this was requested or a URL to the 
+ *                ressource which has just been updated.
  */
 // TODO: doesn't accept input yet!
   public String doMingleCall(URL url, String method, String xml) {
     if (method == null) method = "GET";
-    HttpURLConnection connection = new HttpURLConnection(url);
+    //HttpURLConnection connection = new HttpURLConnection(url);
+    HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+    connection.setDoInput(true);
+    if (xml != null) connection.setDoOutput(true);
+    else method = "GET"; // if nothing to update is given it's obviously that we should use GET
     // Checks for valid Http method. Mingle supports: GET, POST, PUT or DELETE.
     if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
       connection.setRequestMethod(method);
     }
     else throw ProtocolException();
     connection.setFollowRedirects(true);
-    //connection.connect();
+    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // maybe with "; charset=utf-8" in the end?
+    connection.connect();
+    // Output stuff:
+    if (xml != null) {
+      OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+      out.write(xml);
+      out.close();
+    }
+
+    // Input stuff:
     InputStream is = connection.getInputStream();
     resultString = "";
     // convert InputStream to String
