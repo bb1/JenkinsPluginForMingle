@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <!-- source: https://github.com/ThoughtWorksStudios/mingle-api-js-demo/blob/master/index.html -->
+    <title>Mingle Config</title>
+    <!--<script src="static/sample.js" type="text/javascript"></script>-->
+
+    <style type="text/css">
+        body {
+            padding: 10px;
+            font-family: sans-serif;
+        }
+
+        .diagnostics {
+            padding: 10px;
+            font-weight: bold;
+            background: black;
+            color: GreenYellow;
+            font-family: monospace;
+        }
+
+        .diagnostics .error {
+            color: OrangeRed;
+        }
+
+        .diagnostics a {
+            color: white;
+        }
+
+        .diagnostics a:visited {
+            color: gray;
+        }
+
+        form label {
+            display: block;
+        }
+
+        fieldset.prop_name_and_value input {
+            display: inline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="mingle_response" class="diagnostics">
+    <p class="error" id="error"></p>
+
+    <pre id="result"></pre>
+</div>
+
+<form id="update_card_form" action="">
+    <fieldset>
+        <label for="mingle_instance">Mingle Instance</label>
+        <input id="mingle_instance" type="text" size="64" value="http://localhost:8080"/>
+
+        <label for="project_identifier">Project Identifier (same as in URL)</label>
+        <input id="project_identifier" type="text" size="32"/>
+
+        <label for="card_number">Card Number</label>
+        <input id="card_number" type="text" size="24"/>
+
+        <label for="api_username">Username</label>
+        <input id="api_username" type="text" value="admin"/>
+
+        <label for="api_password">Password</label>
+        <input type="password" id="api_password"/>
+    </fieldset>
+
+    <fieldset class="prop_names_and_values">
+        <label>Property Names &amp; Values</label>
+        <div class="pair">
+            <input class="name" type="text" value="Status"/> = <input class="value" type="text"/>
+        </div>
+        <div class="pair">
+            <input class="name" type="text" value="Size"/> = <input class="value" type="text"/>
+        </div>
+        <div class="pair">
+            <input class="name" type="text" value=""/> = <input class="value" type="text"/>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <label>
+            Card Description<br/>
+            <textarea id="description" rows="15" cols="120"></textarea>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <input type="submit" value="Update Card"/>
+    </fieldset>
+</form>
+</body>
+
+</html>
