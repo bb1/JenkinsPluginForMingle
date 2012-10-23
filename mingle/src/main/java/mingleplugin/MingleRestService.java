@@ -45,9 +45,12 @@ public class MingleRestService {
 
 // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
-  xstream.alias("MingleObject", MingleObject.class);
-  xstream.alias("MingleCard", MingleCard.class);
-  xstream.alias("MingleCardProperty", MingleCardProperty.class);
+  xstream.alias("card", MingleCard.class);
+  xstream.alias("property", MingleCardProperty.class);
+  xstream.alias("project", MingleProject.class);
+  xstream.alias("user", MingleUser.class);
+  //TODO: fix: [ERROR] mingleplugin/MingleRestService.java:[49,47] <identifier> expected ? Maybe put it in a function?
+
 
 
   @DataBoundConstructor
@@ -209,7 +212,7 @@ public class MingleRestService {
      */
 
     //get the LOCCATION ATTRIBUTE from the HTTP Header:
-    if (resultString == "") resultString = connection.getHeaderFieldDate("Location");
+    if (resultString == "") resultString = connection.getHeaderField("Location");
 
     return resultString;
   }
