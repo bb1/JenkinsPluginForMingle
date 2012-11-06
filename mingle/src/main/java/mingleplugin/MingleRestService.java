@@ -12,10 +12,12 @@ import java.util.Arrays;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.InputStream;
+import java.lang.IllegalArgumentException;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 // TODO: Imports for Input/Output Streams etc.
 
@@ -88,8 +90,10 @@ public class MingleRestService {
  * Generates a URL for the mingle REST call.
  * 
  * @return URL returns a URL including username and password.
+ *
+ * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
-  public URL generateRestUrl(String action) {
+  public URL generateRestUrl(String action) throws MalformedURLException {
     return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+url.getPort()+"/"+url.getPath()+action);
   }
 
@@ -98,10 +102,17 @@ public class MingleRestService {
  *
  * @param int number The unique number of the requested card.
  * 
- * @return MingleCard Returns a mingle card by it's unique number.
+ * @return MingleCard Returns a mingle card by it's unique number. Returns null if the request failed or the URL is wrong.
  */
   public MingleCard getCardByNumber(int number) {
-    String xml = doMingleCall(generateRestUrl("cards/"+number+".xml"), "GET" , null);
+    String xml;
+
+    try {
+      xml = doMingleCall(generateRestUrl("cards/"+number+".xml"), "GET" , null);
+    } catch (MalformedURLException e) {
+      return null;
+    }
+
     // convert XML to some kind of useful MingleCart or MingleSomething-object using XStream:
     MingleCard card = (MingleCard)xstream.fromXML(xml);
     return card;
@@ -112,12 +123,18 @@ public class MingleRestService {
  *
  * @param number The unique number of the requested card.
  * @param card The new mingle card that should replace the version on the mingle server.
+ *
+ * @trows IllegalArgumentException throws an IllegalArgumentException if any of the passed parameters is invalid.
  */
-  public void updateCardByNumber(int number, MingleCard card) {
+  public void updateCardByNumber(int number, MingleCard card) throws IllegalArgumentException {
     // Converts a MingleCard to a XML String.
 
     String xml = xstream.toXML(card);
-    doMingleCall(generateRestUrl("cards/"+number+".xml"), "PUT", xml);
+    try {
+      URL url = new URL (doMingleCall(generateRestUrl("cards/"+number+".xml"), "PUT", xml));
+    } catch (MalformedURLException e) {
+      throw new IllegalArgumentException();
+    }
   }
 
 /**
@@ -127,8 +144,10 @@ public class MingleRestService {
  * @param String cardtype The cardtype of the new mingle card that should be created on the server.
  *
  * @return URL The URL of the new created card will be returned.
+ *
+ * @throws MalformedURLException thrown if the returned URL by mingle is invalid.
  */
-  public URL createEmptyCard(String name, String cardtype) {
+  public URL createEmptyCard(String name, String cardtype) throws MalformedURLException {
     // generates XML-string for card creation:
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
@@ -143,22 +162,35 @@ public class MingleRestService {
  *
  * @param MingleCard card The new mingle card that should be created on the server.
  *
- * @return int The unique card number of the new created card will be returned.
+ * @return int The unique card number of the new created card will be returned. Returns null if the creation failed.
  */
   public int createCard(MingleCard card) {
-    // creates a new card:
-    URL url = createEmptyCard(card.getName(), card.getCardtype());
+
+    URL url;
+    try {
+      // creates a new card:
+      url = createEmptyCard(card.getName(), card.getCardtype());
+    } catch (MalformedURLException e) {
+      return null;
+    }
     
     // get cardnumber out of url:
     String urlpath = url.getPath();
     int cardnumber = Integer.parseInt(urlpath.substring(urlpath.lastIndexOf("/cards/")+7, urlpath.lastIndexOf(".xml")));
     // int cardnumber = (int)urlpath.substring(urlpath.lastIndexOf("/cards/")+7, urlpath.lastIndexOf(".xml") - (urlpath.lastIndexOf("/cards/")+7));
     
-    // updates the new created card with the passed content:
-    updateCardByNumber(cardnumber, card);
+    try {
+      // updates the new created card with the passed content:
+      updateCardByNumber(cardnumber, card);
+    } catch (IllegalArgumentException e) {
+      //deleteCardByNumber(cardnumber);
+      return null;
+    }
 
     return cardnumber;
   }
+
+  //TODO: deleteCardByNumber(int number)
 
   //TODO: Do we need: Method getListOfCards(view, page, filters[], sort, order, tagged_with ) and so on?
 
