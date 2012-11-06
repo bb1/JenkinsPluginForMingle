@@ -3,9 +3,8 @@ package mingleplugin;
 import java.util.HashMap;
 import java.util.Map;
 import java.net.URL;
-import javax.xml.bind.annotation;
+import java.util.Date;
 
-@XmlRootElement
 class MingleCard extends MingleObject {
 
   private String mingleObjectType = "MingleCard";
@@ -51,10 +50,10 @@ class MingleCard extends MingleObject {
       this.description = arg;
   }
   
-  Map<String, String> getproject() {
+  MingleProject getproject() {
       return project;
   }
-  void setproject(Map<String, String> arg) {
+  void setproject(MingleProject arg) {
       this.project = arg;
   }
 
@@ -77,17 +76,17 @@ class MingleCard extends MingleObject {
   }
 
   // Constructor only with essential constants
-  public MingleCard (int id, int number, int version, Date created_on,  Date modified_on, MingleUser created_by) {
+  public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by) {
     this.id = id;
     this.number = number;
     this.version = version;
     this.created_on = created_on;
     this.modified_on = modified_on;
-    this.created_by = created_on;
+    this.created_by = created_by;
   }
 
   // Constructor with all possible stuff
-  public MingleCard (int id, int number, int version, Date created_on,  Date modified_on, MingleUser created_by,
+  public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by,
                      String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
                      String tags, URL rendered_description) {
     this.id = id;
@@ -95,7 +94,7 @@ class MingleCard extends MingleObject {
     this.version = version;
     this.created_on = created_on;
     this.modified_on = modified_on;
-    this.created_by = created_on;
+    this.created_by = created_by;
     this.name = name;
     this.description = description;
     this.cardtype = cardtype;

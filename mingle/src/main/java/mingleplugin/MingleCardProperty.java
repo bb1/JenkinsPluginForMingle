@@ -6,6 +6,8 @@ package mingleplugin;
 // is always String. The property also includes attributes about the property type_description
 // and whether or not it is hidden.
 
+import java.util.Arrays;
+
 class MingleCardProperty extends MingleObject{
   
   private String mingleObjectType = "MingleCardProperty";
@@ -30,7 +32,11 @@ class MingleCardProperty extends MingleObject{
   }
 
   public void setValue( Object obj ) {
-    if (obj instanceof String || obj instanceof String || obj.class.isAssignableFrom(int.class) || obj instanceof Array) { // checks for valid data types. incomplete!
+    // checks for valid data types. incomplete!
+    // TODO: complete checks
+    if (obj instanceof String || obj instanceof String || 
+        obj instanceof Integer || obj instanceof Object[]
+        ) {
       this.value = obj;
     }
   }

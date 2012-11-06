@@ -28,7 +28,7 @@ class MingleUser extends MingleObject{
     this.login = login;
   }
 
-  MingleCardProperty(String name, String login) {
+  MingleUser(String name, String login) {
     this.name = name;
     this.login = login;
   }

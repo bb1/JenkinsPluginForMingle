@@ -8,9 +8,14 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
+import java.util.Arrays;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.InputStream;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
+import com.thoughtworks.xstream.*;
 
 // TODO: Imports for Input/Output Streams etc.
 
@@ -45,16 +50,19 @@ public class MingleRestService {
 
 // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
+
+
+
+
+  @DataBoundConstructor
+  public MingleRestService(URL url, String userName, String password, boolean supportsWikiStyleComment) {
+
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
   xstream.alias("project", MingleProject.class);
   xstream.alias("user", MingleUser.class);
   //TODO: fix: [ERROR] mingleplugin/MingleRestService.java:[49,47] <identifier> expected ? Maybe put it in a function?
 
-
-
-  @DataBoundConstructor
-  public MingleRestService(URL url, String userName, String password, boolean supportsWikiStyleComment) {
     if(!url.toExternalForm().endsWith("/")) {
       try {
         url = new URL(url.toExternalForm()+"/");
@@ -63,8 +71,8 @@ public class MingleRestService {
       }
     }
     this.url = url;
-    this.userName = Util.fixEmpty(userName);
-    this.password = Util.fixEmpty(password);
+    this.userName = (userName == "") ? null : userName;
+    this.password = (password == "") ? null : password;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
@@ -120,7 +128,7 @@ public class MingleRestService {
  *
  * @return URL The URL of the new created card will be returned.
  */
-  public int createEmptyCard(String name, String cardtype) {
+  public URL createEmptyCard(String name, String cardtype) {
     // generates XML-string for card creation:
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
@@ -143,7 +151,7 @@ public class MingleRestService {
     
     // get cardnumber out of url:
     String urlpath = url.getPath();
-    int cardnumber = (int)urlpath.substring(urlpath.lastIndexOf("/cards/")+7, urlpath.lastIndexOf(".xml"));
+    int cardnumber = Integer.parseInt(urlpath.substring(urlpath.lastIndexOf("/cards/")+7, urlpath.lastIndexOf(".xml")));
     // int cardnumber = (int)urlpath.substring(urlpath.lastIndexOf("/cards/")+7, urlpath.lastIndexOf(".xml") - (urlpath.lastIndexOf("/cards/")+7));
     
     // updates the new created card with the passed content:
@@ -181,7 +189,7 @@ public class MingleRestService {
     if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
       connection.setRequestMethod(method);
     }
-    else throw ProtocolException();
+    else throw new ProtocolException();
     connection.setFollowRedirects(true);
     connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // maybe with "; charset=utf-8" in the end?
     connection.connect();
@@ -194,7 +202,7 @@ public class MingleRestService {
 
     // Input stuff:
     InputStream is = connection.getInputStream();
-    resultString = "";
+    String resultString = "";
     // convert InputStream to String
     Scanner scanner = new Scanner(is, "UTF-8").useDelimiter("\\A"); // or "\\Z" ?
     if (scanner.hasNext()) {
