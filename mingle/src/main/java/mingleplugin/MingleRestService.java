@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.InputStream;
+import java.io.IOException;
 import java.lang.IllegalArgumentException;
 
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -54,8 +55,6 @@ public class MingleRestService {
   XStream xstream = new XStream(new StaxDriver());
 
 
-
-
   @DataBoundConstructor
   public MingleRestService(URL url, String userName, String password, boolean supportsWikiStyleComment) {
 
@@ -63,7 +62,6 @@ public class MingleRestService {
   xstream.alias("property", MingleCardProperty.class);
   xstream.alias("project", MingleProject.class);
   xstream.alias("user", MingleUser.class);
-  //TODO: fix: [ERROR] mingleplugin/MingleRestService.java:[49,47] <identifier> expected ? Maybe put it in a function?
 
     if(!url.toExternalForm().endsWith("/")) {
       try {
@@ -162,7 +160,7 @@ public class MingleRestService {
  *
  * @param MingleCard card The new mingle card that should be created on the server.
  *
- * @return int The unique card number of the new created card will be returned. Returns null if the creation failed.
+ * @return int The unique card number of the new created card will be returned. Returns -1 if the creation failed.
  */
   public int createCard(MingleCard card) {
 
@@ -171,7 +169,7 @@ public class MingleRestService {
       // creates a new card:
       url = createEmptyCard(card.getName(), card.getCardtype());
     } catch (MalformedURLException e) {
-      return null;
+      return -1;
     }
     
     // get cardnumber out of url:
@@ -183,14 +181,21 @@ public class MingleRestService {
       // updates the new created card with the passed content:
       updateCardByNumber(cardnumber, card);
     } catch (IllegalArgumentException e) {
-      //deleteCardByNumber(cardnumber);
-      return null;
+      deleteCardByNumber(cardnumber);
+      return -1;
     }
 
     return cardnumber;
   }
 
-  //TODO: deleteCardByNumber(int number)
+  public void deleteCardByNumber(int number) {
+    try {
+      URL url = new URL (doMingleCall(generateRestUrl("cards/"+number+".xml"), "DELETE", null));
+    } catch (MalformedURLException e) {
+      // nix
+    }
+    //TODO: delte card in local Java cache... but there is no cache yet.
+  }
 
   //TODO: Do we need: Method getListOfCards(view, page, filters[], sort, order, tagged_with ) and so on?
 
@@ -204,55 +209,62 @@ public class MingleRestService {
  * @param xml String A string that represents a MingleObject in XML form or null if just requesting data.
  * 
  * @return String XML object that can be parsed as a MingleObject if this was requested or a URL to the 
- *                ressource which has just been updated.
+ *                ressource which has just been updated. Returns an empty string if an IO error occurs.
  */
   public String doMingleCall(URL url, String method, String xml) {
     // Default HTTP method is GET:
     if (method == null) method = "GET";
 
-    // Set up connection:
-    //HttpURLConnection connection = new HttpURLConnection(url);
-    HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-    connection.setDoInput(true);
-    if (xml != null) connection.setDoOutput(true);
-    else method = "GET"; // if nothing to update/delete is given it's obviously that we should use GET
-
-    // Checks for valid Http method. Mingle supports: GET, POST, PUT or DELETE.
-    if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
-      connection.setRequestMethod(method);
-    }
-    else throw new ProtocolException();
-    connection.setFollowRedirects(true);
-    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // maybe with "; charset=utf-8" in the end?
-    connection.connect();
-    // Output stuff:
-    if (xml != null) {
-      OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
-      out.write(xml);
-      out.close();
-    }
-
-    // Input stuff:
-    InputStream is = connection.getInputStream();
     String resultString = "";
-    // convert InputStream to String
-    Scanner scanner = new Scanner(is, "UTF-8").useDelimiter("\\A"); // or "\\Z" ?
-    if (scanner.hasNext()) {
-      try {
-        resultString = scanner.next();
-      } catch (java.util.NoSuchElementException e) {
-        resultString = "";
+
+    try {
+      // Set up connection:
+      //HttpURLConnection connection = new HttpURLConnection(url);
+      HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+      connection.setDoInput(true);
+      if (xml != null) connection.setDoOutput(true);
+      else method = "GET"; // if nothing to update/delete is given it's obviously that we should use GET
+    
+      // Checks for valid Http method. Mingle supports: GET, POST, PUT or DELETE.
+      if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
+        connection.setRequestMethod(method);
       }
+      else throw new ProtocolException();
+      connection.setFollowRedirects(true);
+      connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // maybe with "; charset=utf-8" in the end?
+      connection.connect();
+      // Output stuff:
+      if (xml != null) {
+        OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+        out.write(xml);
+        out.close();
+      }
+    
+      // Input stuff:
+      InputStream is = connection.getInputStream();
+      // convert InputStream to String
+      Scanner scanner = new Scanner(is, "UTF-8").useDelimiter("\\A"); // or "\\Z" ?
+      if (scanner.hasNext()) {
+        try {
+          resultString = scanner.next();
+        } catch (java.util.NoSuchElementException e) {
+          resultString = "";
+        }
+      }
+
+      /**
+       * "Result: If you were authorized to perform the operation, and the operation succeeded, 
+       * you will be returned a LOCATION ATTRIBUTE in the http header of the response, which 
+       * is a URL to the updated resource."
+       */
+  
+      //get the LOCCATION ATTRIBUTE from the HTTP Header:
+      if (resultString == "") resultString = connection.getHeaderField("Location");
+
     }
-
-    /**
-     * "Result: If you were authorized to perform the operation, and the operation succeeded, 
-     * you will be returned a LOCATION ATTRIBUTE in the http header of the response, which 
-     * is a URL to the updated resource."
-     */
-
-    //get the LOCCATION ATTRIBUTE from the HTTP Header:
-    if (resultString == "") resultString = connection.getHeaderField("Location");
+    catch (IOException e) {
+      return "";
+    }
 
     return resultString;
   }

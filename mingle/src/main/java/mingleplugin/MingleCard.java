@@ -5,25 +5,25 @@ import java.util.Map;
 import java.net.URL;
 import java.util.Date;
 
-class MingleCard extends MingleObject {
+class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
-  private String mingleObjectType = "MingleCard";
+  public String mingleObjectType = "MingleCard";
 
-  private String name;
-  private String description;
-  private String cardtype;
+  public String name;
+  public String description;
+  public String cardtype;
   
-  private MingleProject project;
-  private MingleCardProperty[] properties;
-  private String tags; // comma-delimited list of tags
-  private URL rendered_description; // Resource; Link to rendered card description as HTML.
+  public MingleProject project;
+  public MingleCardProperty[] properties;
+  public String tags; // comma-delimited list of tags
+  public URL rendered_description; // Resource; Link to rendered card description as HTML.
   // read only, must be set inside the constructor and can't be changed:
-  private final int id;
-  private final int number;
-  private final int version;
-  private final Date created_on;
-  private final Date modified_on;
-  private final MingleUser created_by;
+  public final int id;
+  public final int number;
+  public final int version;
+  public final Date created_on;
+  public final Date modified_on;
+  public final MingleUser created_by;
 
   // getter and setter:
   public String getName()
@@ -66,13 +66,21 @@ class MingleCard extends MingleObject {
   {
     return modified_on;
   }
-  
+ 
+  int getNumber() {
+    return number;
+  }
+
   int getId() {
     return id;
   }
 
   int getVersion() {
     return version;
+  }
+
+  public int compareTo(MingleCard that) {
+    return this.number.compareTo(that.number);
   }
 
   // Constructor only with essential constants

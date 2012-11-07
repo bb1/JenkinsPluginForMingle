@@ -11,7 +11,11 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
+  <builders>
+    <mingleplugin.HelloWorldBuilder>
+      <name>TESTESTESTEST!bla</name>
+    </mingleplugin.HelloWorldBuilder>
+  </builders>
   <publishers/>
   <buildWrappers/>
 </project>
