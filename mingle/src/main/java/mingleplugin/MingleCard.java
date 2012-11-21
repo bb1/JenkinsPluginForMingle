@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.net.URL;
 import java.util.Date;
+import java.lang.Integer;
 
 class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
@@ -80,7 +81,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   }
 
   public int compareTo(MingleCard that) {
-    return this.number.compareTo(that.number);
+    return Integer.valueOf(this.number).compareTo(Integer.valueOf(that.number));
   }
 
   // Constructor only with essential constants

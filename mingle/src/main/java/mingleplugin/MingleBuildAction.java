@@ -42,7 +42,7 @@ public class MingleBuildAction implements Action {
  */
     public MingleCard getCard(int number) {
         for (MingleCard card : cards) {
-            if(card.id.equals(id))
+            if(card.number == number)
                 return card;
         }
         return null;
