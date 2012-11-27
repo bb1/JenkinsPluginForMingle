@@ -30,7 +30,7 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         if(serv==null) return;    // not configured with Mingle
 
         // if there's any recorded detail information, try to use that, too.
-        JiraBuildAction a = build.getAction(JiraBuildAction.class);
+        MingleBuildAction a = build.getAction(MingleBuildAction.class);
         
         Set<MingleCard> cardToBeSaved = new HashSet<MingleCard>();
         
@@ -95,12 +95,12 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         }
     }
     */
-    private void saveCards(AbstractBuild<?, ?> build, JiraBuildAction a,
+    private void saveCards(AbstractBuild<?, ?> build, MingleBuildAction a,
             Set<MingleCard> cardToBeSaved) {
         if (a != null) {
             a.addCard(cardToBeSaved);
         } else {
-            JiraBuildAction action = new JiraBuildAction(build, cardToBeSaved);
+            MingleBuildAction action = new MingleBuildAction(build, cardToBeSaved);
             build.addAction(action);
         }
         

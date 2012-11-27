@@ -30,28 +30,46 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  * @version 0.7
  */
 public class MingleRestService {
-/**
- * URL of mingle, like <tt>http://mingle/api/v2/projects/scrum/</tt>.
- * Mandatory. Normalized to end with '/'
- */
+
+  /**
+   * Regexp pattern that identifies Mingle Card.
+   * If this pattern changes help pages (help-issue-pattern_xy.html) must be updated 
+   * <p>
+   * First char must be the car #, then digits.
+   * See #392 and #404
+   */
+  protected static final Pattern DEFAULT_ISSUE_PATTERN = Pattern.compile("#([0-9]+)");
+
+
+  /**
+   * URL of mingle, like <tt>http://mingle/api/v2/projects/scrum/</tt>.
+   * Mandatory. Normalized to end with '/'
+   */
   public final URL url;
 
-/**
- * User name needed to login. Optional?
- */
+  /**
+   * User name needed to login. Optional?
+   */
   public final String userName;
 
-/**
- * Password needed to login. Optional?
- */
+  /**
+   * Password needed to login. Optional?
+   */
   public final String password;
 
-/**
- * True if this mingle is configured to allow Confluence-style Wiki comment. Wait? Wat?
- */
+  /**
+   * user defined pattern
+   */    
+  private final String userPattern;
+  
+  private transient Pattern userPat;
+
+  /**
+   * True if this mingle is configured to allow Confluence-style Wiki comment. Wait? Wat?
+   */
   public final boolean supportsWikiStyleComment;
 
-// XStream set up:
+  // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
 
 
@@ -268,5 +286,33 @@ public class MingleRestService {
 
     return resultString;
   }
+
+    /**
+     * Gets the user-defined issue pattern if any.
+     * 
+     * @return the pattern or null
+     */
+    public Pattern getUserPattern() {
+      if (userPattern == null) {
+        return null;
+      }
+      
+      if (userPat == null) {
+        // We don't care about any thread race- or visibility issues here.
+        // The worst thing which could happen, is that the pattern
+        // is compiled multiple times.
+        Pattern p = Pattern.compile(userPattern);
+        userPat = p;
+      }
+      return userPat;
+    }
+
+    public Pattern getMinglePattern() {
+      if (getUserPattern() != null) {
+        return getUserPattern();
+      }
+      
+      return DEFAULT_ISSUE_PATTERN;
+    }  
 
 }
