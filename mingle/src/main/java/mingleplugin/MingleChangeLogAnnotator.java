@@ -34,11 +34,10 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         
         Set<MingleCard> cardToBeSaved = new HashSet<MingleCard>();
         
-        /* TODO: we have no pattern. just the number of the card? maybe pattern for branch names??
-        Pattern pattern = serv.getIssuePattern();
+        Pattern pattern = serv.getCardPattern();
         
         if (LOGGER.isLoggable(Level.FINE)) {
-        	LOGGER.fine("Using issue pattern: " + pattern);
+        	LOGGER.fine("Using card pattern: " + pattern);
         }
         
         String plainText = text.getText();
@@ -48,41 +47,37 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         while (m.find()) {
         	if (m.groupCount() >= 1) {
         		
-        		String id = m.group(1);
-        		LOGGER.info("Annotating JIRA id: '" + id + "'");
+        		int id = Integer.parseInt(m.group(1));
+        		LOGGER.info("Annotating Card number: '" + id + "'");
             	
-                if(!serv.existsIssue(id)) {
-                    continue;
-                }
-                
-                URL url;
-                try {
-                	url = serv.getUrl(id);
-                } catch (MalformedURLException e) {
-                	throw new AssertionError(e); // impossible
-                }
-
-                JiraIssue issue = null;
+                MingleCard card = null;
                 if (a != null) {
-                    issue = a.getIssue(id);
+                    card = a.getCard(id); // try to get cached card
                 }
 
-                if (issue == null) {
+                if (card == null) {
                     try {
-                        issue = serv.getIssue(id);+
-                        if (issue != null) {
-                        	cardToBeSaved.add(issue);
+                        card = serv.getCard(id);+
+                        if (card != null) {
+                        	cardToBeSaved.add(card); // cache the card
                         }
                     } catch (Exception e) {
-                        LOGGER.log(Level.WARNING, "Error getting remote issue " + id, e);
+                        LOGGER.log(Level.WARNING, "Error getting remote card " + id, e);
                     }
                 }
 
-                if(issue==null) {
+                URL url;
+                try {
+                    url = site.getCardUrl(id);
+                } catch (MalformedURLException e) {
+                    throw new AssertionError(e); // impossible
+                }
+
+                if(card==null) {
                 	text.addMarkup(m.start(1), m.end(1), "<a href='"+url+"'>", "</a>");
                 } else {
                 	text.addMarkup(m.start(1), m.end(1),
-            			String.format("<a href='%s' tooltip='%s'>",url, Util.escape(issue.title)), "</a>");
+            			String.format("<a href='%s' tooltip='%s'>",url, Util.escape(card.title)), "</a>");
                 }
         		
         	} else {

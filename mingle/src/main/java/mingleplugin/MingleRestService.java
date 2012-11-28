@@ -35,10 +35,10 @@ public class MingleRestService {
    * Regexp pattern that identifies Mingle Card.
    * If this pattern changes help pages (help-issue-pattern_xy.html) must be updated 
    * <p>
-   * First char must be the car #, then digits.
+   * First character must be the character #, then digits.
    * See #392 and #404
    */
-  protected static final Pattern DEFAULT_ISSUE_PATTERN = Pattern.compile("#([0-9]+)");
+  protected static final Pattern DEFAULT_CARD_PATTERN = Pattern.compile("#([0-9]+)");
 
 
   /**
@@ -48,14 +48,19 @@ public class MingleRestService {
   public final URL url;
 
   /**
-   * User name needed to login. Optional?
+   * User name needed to login.
    */
   public final String userName;
 
   /**
-   * Password needed to login. Optional?
+   * Password needed to login.
    */
   public final String password;
+
+  /**
+   * Mingle project name
+   */
+  public final String project;
 
   /**
    * user defined pattern
@@ -71,6 +76,11 @@ public class MingleRestService {
 
   // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
+
+  /**
+   * conected mingle card
+   */
+  private 
 
 
   @DataBoundConstructor
@@ -120,7 +130,7 @@ public class MingleRestService {
  * 
  * @return MingleCard Returns a mingle card by it's unique number. Returns null if the request failed or the URL is wrong.
  */
-  public MingleCard getCardByNumber(int number) {
+  public MingleCard getCard(int number) {
     String xml;
 
     try {
@@ -307,12 +317,12 @@ public class MingleRestService {
       return userPat;
     }
 
-    public Pattern getMinglePattern() {
+    public Pattern getCardPattern() {
       if (getUserPattern() != null) {
         return getUserPattern();
       }
       
-      return DEFAULT_ISSUE_PATTERN;
+      return DEFAULT_CARD_PATTERN;
     }  
 
 }
