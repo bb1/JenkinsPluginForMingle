@@ -32,39 +32,36 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     return name;
   }
 
-  public void setName( String name )
-  {
+  public void setName( String name ) {
     this.name = name;
   }
 
   String getCardtype() {
-      return cardtype;
+    return cardtype;
   }
   void setCardtype(String arg) {
-      this.cardtype = arg;
+    this.cardtype = arg;
   }
 
   String getDescription() {
-      return description;
+    return description;
   }
   void setDescription(String arg) {
-      this.description = arg;
+    this.description = arg;
   }
   
   MingleProject getproject() {
-      return project;
+    return project;
   }
   void setproject(MingleProject arg) {
       this.project = arg;
   }
 
-  public Date getCreatedOn()
-  {
+  public Date getCreatedOn() {
     return created_on;
   }
 
-  public Date getModifiedOn()
-  {
+  public Date getModifiedOn() {
     return modified_on;
   }
  

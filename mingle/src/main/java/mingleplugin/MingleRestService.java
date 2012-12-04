@@ -42,7 +42,7 @@ public class MingleRestService {
 
 
   /**
-   * URL of mingle, like <tt>http://mingle/api/v2/projects/scrum/</tt>.
+   * URL of mingle, like <tt>http://mingle/api/v2/projects/</tt>.
    * Mandatory. Normalized to end with '/'
    */
   public final URL url;
@@ -58,7 +58,7 @@ public class MingleRestService {
   public final String password;
 
   /**
-   * Mingle project name
+   * Mingle project name. e.g. "scrum".
    */
   public final String project;
 
@@ -78,9 +78,8 @@ public class MingleRestService {
   XStream xstream = new XStream(new StaxDriver());
 
   /**
-   * conected mingle card
+   * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
    */
-  private 
 
 
   @DataBoundConstructor
@@ -120,8 +119,22 @@ public class MingleRestService {
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL generateRestUrl(String action) throws MalformedURLException {
-    return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+url.getPort()+"/"+url.getPath()+action);
+    return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+project+"/"+action);
   }
+
+/**
+ * Generates a URL for link to the mingle system. The user have to be logged in to see the card.
+ * 
+ * @return URL returns a URL to the mingle system.
+ *
+ * @throws MalformedURLException thrown if there is a error inside any part of the URL.
+ */
+  public URL getCardUrl(int cardnumber) throws MalformedURLException {
+    String protocol = url.getProtocol();
+    if ( !(protocol.equals("http") || protocol.equals("https")) ) protocol = "http";
+    return new URL(protocol+"://"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+project+"/cards/"+cardnumber);
+  }
+
 
 /**
  * Gets a mingle card by it's unique number.
@@ -323,6 +336,9 @@ public class MingleRestService {
       }
       
       return DEFAULT_CARD_PATTERN;
-    }  
+    } 
+
+
+    //TODO: get(build) --> session of this service?!
 
 }
