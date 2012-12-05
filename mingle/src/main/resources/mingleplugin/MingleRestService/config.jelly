@@ -1,0 +1,27 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:entry title="URL" field="url">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="${%Supports Wiki notation}" field="supportsWikiStyleComment">
+    <f:checkbox />
+  </f:entry>
+  <f:entry title="${%Card Pattern}" field="userPattern">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="${%User Name}" field="userName">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="${%Password}" field="password"
+      description="${%username.password.description}">
+    <f:password />
+  </f:entry>
+  <f:entry>
+    <f:validateButton title="${%Validate Settings}"
+            method="validate" with="url,userName,password" />
+  </f:entry>
+  <f:entry title="">
+    <div align="right">
+      <f:repeatableDeleteButton />
+    </div>
+  </f:entry>
+</j:jelly>

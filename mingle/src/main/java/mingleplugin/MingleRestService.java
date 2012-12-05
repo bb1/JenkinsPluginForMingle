@@ -42,7 +42,7 @@ public class MingleRestService {
 
 
   /**
-   * URL of mingle, like <tt>http://mingle/api/v2/projects/</tt>.
+   * URL of mingle, like <tt>http://mingle:80/</tt>.
    * Mandatory. Normalized to end with '/'
    */
   public final URL url;
@@ -119,7 +119,7 @@ public class MingleRestService {
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL generateRestUrl(String action) throws MalformedURLException {
-    return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+project+"/"+action);
+    return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+"/api/v2/projects/"+project+"/"+action);
   }
 
 /**
@@ -132,7 +132,7 @@ public class MingleRestService {
   public URL getCardUrl(int cardnumber) throws MalformedURLException {
     String protocol = url.getProtocol();
     if ( !(protocol.equals("http") || protocol.equals("https")) ) protocol = "http";
-    return new URL(protocol+"://"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+project+"/cards/"+cardnumber);
+    return new URL(protocol+"://"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+"/projects/"+project+"/cards/"+cardnumber);
   }
 
 
@@ -338,7 +338,6 @@ public class MingleRestService {
       return DEFAULT_CARD_PATTERN;
     } 
 
-
-    //TODO: get(build) --> session of this service?!
+    //TODO: get(build) --> session of this service + config?!
 
 }
