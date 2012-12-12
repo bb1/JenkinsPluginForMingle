@@ -83,7 +83,7 @@ public class MingleRestService {
 
 
   @DataBoundConstructor
-  public MingleRestService(URL url, String userName, String password, boolean supportsWikiStyleComment) {
+  public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
@@ -100,6 +100,8 @@ public class MingleRestService {
     this.url = url;
     this.userName = (userName == "") ? null : userName;
     this.password = (password == "") ? null : password;
+    this.project = (project == "") ? null : project;
+    this.userPattern = (userPattern == "") ? null : userPattern;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
@@ -136,13 +138,14 @@ public class MingleRestService {
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL getCardUrl(int cardnumber) throws MalformedURLException {
-    String protocol, url_s;
+    String url_s;
+    String protocol = url.getProtocol();
     if ( !(protocol.equals("http") || protocol.equals("https")) ) protocol = "http";
     url_s = protocol+"://"+url.getHost()+":"+url.getPort();
     if (! "".equals(url.getPath()) ) {
       url_s += "/"+url.getPath();
     }
-    url_s += "/projects/"+project+"/"+action;
+    url_s += "/projects/"+project+"/cards/"+cardnumber;
     return new URL(url_s);
   }
 

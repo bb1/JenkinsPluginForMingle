@@ -28,6 +28,9 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
   
   @Override
   public void annotate(AbstractBuild<?,?> build, Entry change, MarkupText text) {
+
+    LOGGER.info("Started ChangeLogAnnotator");
+
     MingleRestService serv = getMingleServiceForProject(build.getProject());
     if(serv==null) return;    // not configured with Mingle
 

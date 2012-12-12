@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
 * Mingle cards related to the build.
@@ -15,11 +17,17 @@ import java.util.TreeSet;
 * @author Birk Brauer
 */
 public class MingleBuildAction implements Action {
+
     public final AbstractBuild<?, ?> owner;
 
     public MingleCard[] cards;
 
+    public MingleRestService service;
+
+    private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
+
     public MingleBuildAction(AbstractBuild<?, ?> owner, Collection<MingleCard> cards) {
+        LOGGER.info("Started Build");
         this.owner = owner;
         this.cards = cards.toArray(new MingleCard[cards.size()]);
         Arrays.sort(this.cards);
