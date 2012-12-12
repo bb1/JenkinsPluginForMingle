@@ -107,7 +107,7 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
     }
   }
   MingleRestService getMingleServiceForProject(AbstractProject<?, ?> project) {
-    return MingleRestService.get(project);
+    return null; //MingleRestService.get(project);
   }
 
 }

@@ -119,7 +119,13 @@ public class MingleRestService {
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL generateRestUrl(String action) throws MalformedURLException {
-    return new URL(url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+"/api/v2/projects/"+project+"/"+action);
+    String url_s;
+    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort();
+    if (! "".equals(url.getPath()) ) {
+      url_s += "/"+url.getPath();
+    }
+    url_s += "/api/v2/projects/"+project+"/"+action;
+    return new URL(url_s);
   }
 
 /**
@@ -130,9 +136,14 @@ public class MingleRestService {
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL getCardUrl(int cardnumber) throws MalformedURLException {
-    String protocol = url.getProtocol();
+    String protocol, url_s;
     if ( !(protocol.equals("http") || protocol.equals("https")) ) protocol = "http";
-    return new URL(protocol+"://"+url.getHost()+":"+url.getPort()+"/"+url.getPath()+"/projects/"+project+"/cards/"+cardnumber);
+    url_s = protocol+"://"+url.getHost()+":"+url.getPort();
+    if (! "".equals(url.getPath()) ) {
+      url_s += "/"+url.getPath();
+    }
+    url_s += "/projects/"+project+"/"+action;
+    return new URL(url_s);
   }
 
 
