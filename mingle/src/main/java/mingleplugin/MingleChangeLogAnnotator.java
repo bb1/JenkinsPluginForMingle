@@ -24,7 +24,7 @@ import hudson.scm.ChangeLogSet.Entry;
  */
 @Extension
 public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
-  private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
+  private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName()); // Not working!
   
   @Override
   public void annotate(AbstractBuild<?,?> build, Entry change, MarkupText text) {
