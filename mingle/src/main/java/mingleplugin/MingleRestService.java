@@ -79,6 +79,8 @@ public class MingleRestService {
 
   /**
    * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
+   * right now: saved inside the Build, but:
+   * TODO: How to access the Build from here?
    */
 
 
@@ -353,5 +355,7 @@ public class MingleRestService {
     } 
 
     //TODO: get(build) --> session of this service + config?!
+
+    //TODO: Get Release Notes from mingle?
 
 }

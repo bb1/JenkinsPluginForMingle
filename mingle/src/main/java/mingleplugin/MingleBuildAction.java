@@ -22,6 +22,7 @@ public class MingleBuildAction implements Action {
 
     public MingleCard[] cards;
 
+    //TODO: connection service <-> Build? here or somewhere else? and when will it be initialized?
     public MingleRestService service;
 
     private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
