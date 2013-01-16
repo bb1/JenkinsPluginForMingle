@@ -1,5 +1,7 @@
 package mingleplugin;
 
+import java.net.URL;
+
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
@@ -32,6 +34,20 @@ public class MingleBuildAction implements Action {
         this.owner = owner;
         this.cards = cards.toArray(new MingleCard[cards.size()]);
         Arrays.sort(this.cards);
+
+        // should be changable, savable via DESCRIPTOR etc.
+        URL url;
+        try {
+            url = new URL("http://mingle/");
+        } catch (MalformedURLException e) {
+            //do nothing
+        }
+        String userName = "birk";
+        String password = "Wae6ohl8";
+        String project = "scrum__with_two_teams_";
+        String userPattern = "";
+        boolean supportsWikiStyleComment = false;
+        this.service = new MingleRestService(url, userName, password, project, userPattern, supportsWikiStyleComment);
     }
 
     public String getIconFileName() {
@@ -63,5 +79,12 @@ public class MingleBuildAction implements Action {
         allCard.addAll(Arrays.asList(this.cards));
         
         this.cards = allCard.toArray(new MingleCard[allCard.size()]);
+    }
+
+/**
+ * Finds {@link MingleCard} whose ID matches the given one.
+ */
+    public MingleRestService getService() {
+        return service;
     }
 }

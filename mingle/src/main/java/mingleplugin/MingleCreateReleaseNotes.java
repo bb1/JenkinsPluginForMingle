@@ -23,6 +23,9 @@ import hudson.tasks.Notifier;
 import hudson.tasks.Publisher;
 import hudson.tasks.BuildWrapper;
 
+
+//TODO: delete this file because it only affects the "Release Notes in Jira and Mingle doesn't support this! T_T"
+
 public class MingleCreateReleaseNotes extends BuildWrapper {
 	
 	public static final String DEFAULT_FILTER = "status in (Accepted)";
@@ -33,11 +36,11 @@ public class MingleCreateReleaseNotes extends BuildWrapper {
 	private String mingleFilter;
 
 	@DataBoundConstructor
-	public mingleCreateReleaseNotes(String mingleProjectKey, String mingleRelease, String mingleEnvironmentVariable) {
+	public MingleCreateReleaseNotes(String mingleProjectKey, String mingleRelease, String mingleEnvironmentVariable) {
 		this(mingleProjectKey, mingleRelease, mingleEnvironmentVariable, DEFAULT_FILTER);
 	}
 	
-	public mingleCreateReleaseNotes(String mingleProjectKey, String mingleRelease, String mingleEnvironmentVariable, String mingleFilter) {
+	public MingleCreateReleaseNotes(String mingleProjectKey, String mingleRelease, String mingleEnvironmentVariable, String mingleFilter) {
 		this.mingleRelease = mingleRelease;
 		this.mingleProjectKey = mingleProjectKey;
 		this.mingleEnvironmentVariable = mingleEnvironmentVariable;
@@ -65,8 +68,8 @@ public class MingleCreateReleaseNotes extends BuildWrapper {
 
 		} catch (Exception e) {
 			e.printStackTrace(listener.fatalError(
-					"Unable to generate release notes for mingle version %s/%s: %s", realRelease,
-					mingleProjectKey, e));
+				"Unable to generate release notes for mingle version %s/%s: %s", realRelease,
+				mingleProjectKey, e));
 			listener.finished(Result.FAILURE);
 			return new Environment() { };
 		}
