@@ -12,6 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.net.MalformedURLException;
 
 /**
 * Mingle cards related to the build.
@@ -35,7 +36,7 @@ public class MingleBuildAction implements Action {
         this.cards = cards.toArray(new MingleCard[cards.size()]);
         Arrays.sort(this.cards);
 
-        // should be changable, savable via DESCRIPTOR etc.
+        /*/ should be changable, savable via DESCRIPTOR etc.
         URL url;
         try {
             url = new URL("http://mingle/");
@@ -47,7 +48,7 @@ public class MingleBuildAction implements Action {
         String project = "scrum__with_two_teams_";
         String userPattern = "";
         boolean supportsWikiStyleComment = false;
-        this.service = new MingleRestService(url, userName, password, project, userPattern, supportsWikiStyleComment);
+        this.service = new MingleRestService(url, userName, password, project, userPattern, supportsWikiStyleComment);*/
     }
 
     public String getIconFileName() {

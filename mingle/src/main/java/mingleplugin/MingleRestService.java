@@ -1,5 +1,12 @@
 package mingleplugin;
 
+import hudson.Extension;
+import hudson.Util;
+import hudson.model.AbstractDescribableImpl;
+import hudson.model.AbstractProject;
+import hudson.model.Descriptor;
+import hudson.model.Hudson;
+
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.regex.Pattern;
@@ -326,36 +333,122 @@ public class MingleRestService {
     return resultString;
   }
 
-    /**
-     * Gets the user-defined issue pattern if any.
-     * 
-     * @return the pattern or null
-     */
-    public Pattern getUserPattern() {
-      if (userPattern == null) {
-        return null;
-      }
-      
-      if (userPat == null) {
-        // We don't care about any thread race- or visibility issues here.
-        // The worst thing which could happen, is that the pattern
-        // is compiled multiple times.
-        Pattern p = Pattern.compile(userPattern);
-        userPat = p;
-      }
-      return userPat;
+  /**
+   * Gets the user-defined issue pattern if any.
+   * 
+   * @return the pattern or null
+   */
+  public Pattern getUserPattern() {
+    if (userPattern == null) {
+      return null;
     }
+    
+    if (userPat == null) {
+      // We don't care about any thread race- or visibility issues here.
+      // The worst thing which could happen, is that the pattern
+      // is compiled multiple times.
+      Pattern p = Pattern.compile(userPattern);
+      userPat = p;
+    }
+    return userPat;
+  }
 
-    public Pattern getCardPattern() {
-      if (getUserPattern() != null) {
-        return getUserPattern();
+  public Pattern getCardPattern() {
+    if (getUserPattern() != null) {
+      return getUserPattern();
+    }
+    
+    return DEFAULT_CARD_PATTERN;
+  } 
+
+  //TODO: get(build) --> session of this service + config?!
+
+  //TODO: Get Release Notes from mingle?
+
+
+  // DESCRIPTOR:
+  @Extension
+  public static class DescriptorImpl extends Descriptor<JiraSite> {
+    @Override
+    public String getDisplayName() {
+      return "Mingle Rest Service";
+    }
+    
+    /**
+     * Checks if the Mingle URL is accessible and exists.
+     */
+    public FormValidation doUrlCheck(@QueryParameter final String value)
+      throws IOException, ServletException {
+      // this can be used to check existence of any file in any URL, so
+      // admin only
+      if (!Hudson.getInstance().hasPermission(Hudson.ADMINISTER))
+        return FormValidation.ok();
+
+      return new FormValidation.URLCheck() {
+        @Override
+        protected FormValidation check() throws IOException, ServletException {
+          String url = Util.fixEmpty(value);
+          if (url == null) {
+            return FormValidation.error("The Mingle URL is a mandatory field!");
+          }
+          
+          // call a uri to check if mingle can be reached
+          try {
+            // checks if target url contains the mingle login page
+            if (!findText(open(new URL(url+(url.charAt((url.length()-1)=='/'))?"":"/")+"profile/login")), "<title>Login Profile - Mingle</title>")) 
+              return FormValidation.error("This is a valid URL but it doesnt look like mingle.")
+            URL restUrl = new URL(new URL(url), "/api/v2/projects.xml");
+            if (!findText(open(restUrl), "Incorrect username or password."))
+              return FormValidation.error("Couln't access the mingle API on the given URL. Please check if the Rest-API is activated.");
+            return FormValidation.ok();
+          } catch (IOException e) {
+            LOGGER.log(Level.WARNING,
+                    "Unable to connect to " + url, e);
+            return handleIOException(url, e);
+          }
+        }
+      }.check();
+    
+    public FormValidation doCheckUserPattern(@QueryParameter String value) throws IOException {
+      String userPattern = Util.fixEmpty(value);
+      if (userPattern == null) {// userPattern not entered yet
+        return FormValidation.ok();
       }
-      
-      return DEFAULT_CARD_PATTERN;
-    } 
-
-    //TODO: get(build) --> session of this service + config?!
-
-    //TODO: Get Release Notes from mingle?
+      try {
+        Pattern.compile(userPattern);
+        return FormValidation.ok();
+      } catch (PatternSyntaxException e) {
+        return FormValidation.error(e.getMessage());
+      }
+    
+    /**
+     * Checks if the user name and password are valid.
+     */
+    public FormValidation doValidate( @QueryParameter String userName,
+                                      @QueryParameter String url,
+                                      @QueryParameter String password,
+                                      @QueryParameter String project)
+                throws IOException {
+        url = Util.fixEmpty(url);
+        if (url == null) {// URL not entered yet
+          return FormValidation.error("No URL given");
+        }
+        MingleRestService serv = new MingleRestService(new URL(url), userName, password, project, userPattern, false);
+        try {
+          //serv.createSession();
+          return FormValidation.ok("Success");
+        } catch (AxisFault e) {
+          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url,
+                e);
+          return FormValidation.error(e.getFaultString());
+        } catch (ServiceException e) {
+          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url,
+                e);
+          return FormValidation.error(e.getMessage());
+        }
+    }
+  } //TODO: create FORM (jelly) for this!
+    
+  private static final Logger LOGGER = Logger.getLogger(MingleRestService.class.getName());
 
 }
