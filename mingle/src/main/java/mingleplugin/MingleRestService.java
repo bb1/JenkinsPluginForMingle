@@ -433,9 +433,13 @@ public class MingleRestService {
         if (url == null) {// URL not entered yet
           return FormValidation.error("No URL given");
         }
-        MingleRestService serv = new MingleRestService(new URL(url), userName, password, project, userPattern, false);
+        MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
         try {
           //serv.createSession();
+          //TODO: Check if project exists. 
+          //URL url2 = serv.getURL();
+          //!findText(open(new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
+          //  url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml"), project);
           return FormValidation.ok("Success");
         } catch (AxisFault e) {
           LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url,

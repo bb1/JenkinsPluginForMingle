@@ -15,9 +15,12 @@
       description="${%username.password.description}">
     <f:password />
   </f:entry>
+  <f:entry title="Project Name" field="project">
+    <f:textbox />
+  </f:entry>
   <f:entry>
     <f:validateButton title="${%Validate Settings}"
-            method="validate" with="url,userName,password" />
+            method="validate" with="url,userName,password,project" />
   </f:entry>
   <f:entry title="">
     <div align="right">
