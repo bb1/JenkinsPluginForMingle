@@ -38,6 +38,8 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  */
 public class MingleRestService {
 
+  private static MingleRestService instance;
+
   /**
    * Regexp pattern that identifies Mingle Card.
    * If this pattern changes help pages (help-issue-pattern_xy.html) must be updated 
@@ -92,7 +94,7 @@ public class MingleRestService {
 
 
   @DataBoundConstructor
-  public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+  private MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
@@ -112,6 +114,13 @@ public class MingleRestService {
     this.project = (project == "") ? null : project;
     this.userPattern = (userPattern == "") ? null : userPattern;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
+  }
+
+  public static MingleRestService getInstance() {
+    if ( instance == null ) {
+      instance = new MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment);
+    }
+    return instance;
   }
 
   public String getUrlAsString() {
