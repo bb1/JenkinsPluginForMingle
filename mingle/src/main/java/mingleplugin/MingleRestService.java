@@ -94,7 +94,6 @@ public class MingleRestService {
    */
 
 
-  @DataBoundConstructor
   private initiateService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
@@ -117,6 +116,7 @@ public class MingleRestService {
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
+  @DataBoundConstructor
   public static MingleRestService getInstance(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
     if ( instance == null ) {
       instance = new MingleRestService();
@@ -389,7 +389,7 @@ public class MingleRestService {
     return DEFAULT_CARD_PATTERN;
   } 
 
-  //TODO: get(build) --> session of this service + config?!
+  //TODO: get(build) --> session of this service + config?! --> getInstance now!
 
   //TODO: Get Release Notes from mingle?
 
@@ -423,8 +423,8 @@ public class MingleRestService {
           // call a uri to check if mingle can be reached
           try {
             // checks if target url contains the mingle login page
-            if (!findText(open(new URL(url+(url.charAt((url.length()-1)=='/'))?"":"/")+"profile/login")), "<title>Login Profile - Mingle</title>")) 
-              return FormValidation.error("This is a valid URL but it doesnt look like mingle.")
+            if (!findText(open(new URL(url + (url.charAt(url.length()-1)=='/')?"":"/" + "profile/login")), "<title>Login Profile - Mingle</title>") )
+              return FormValidation.error("This is a valid URL but it doesnt look like mingle.");
             URL restUrl = new URL(new URL(url), "/api/v2/projects.xml");
             if (!findText(open(restUrl), "Incorrect username or password."))
               return FormValidation.error("Couln't access the mingle API on the given URL. Please check if the Rest-API is activated.");
@@ -461,25 +461,29 @@ public class MingleRestService {
         if (url == null) {// URL not entered yet
           return FormValidation.error("No URL given");
         }
-        MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
+        MingleRestService serv = MingleRestService.getInstance(new URL(url), userName, password, null, null, false);
         try {
-          //serv.createSession();
-          //TODO: Check if project exists. 
-          //URL url2 = serv.getURL();
-          //!findText(open(new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
-          //  url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml"), project);
+          // Check if project exists:
+          URL url2 = serv.url;
+          String projectsXML = open(new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
+                               url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml"));
+          if (!findText(projectsXML, "Incorrect username or password."))
+            LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url);
+            return FormValidation.error("Failed to login to mingle at " + url);
+          if (!findText(projectsXML, project))
+            return FormValidation.error("The project name \""+project+"\" can't be found on the mingle server.");
           return FormValidation.ok("Success");
         } catch (AxisFault e) {
-          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url,
-                e);
+          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
           return FormValidation.error(e.getFaultString());
         } catch (ServiceException e) {
-          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url,
-                e);
+          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
           return FormValidation.error(e.getMessage());
         }
+
+        //TODO: ServerException? AxisFault? open() and findText()? Need to import something for that..
     }
-  } //TODO: create FORM (jelly) for this!
+  }
     
   private static final Logger LOGGER = Logger.getLogger(MingleRestService.class.getName());
 
