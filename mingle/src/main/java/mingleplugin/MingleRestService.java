@@ -21,6 +21,7 @@ import java.io.OutputStreamWriter;
 import java.io.InputStream;
 import java.io.IOException;
 import java.lang.IllegalArgumentException;
+import java.lang.IllegalStateException;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
@@ -47,41 +48,41 @@ public class MingleRestService {
    * First character must be the character #, then digits.
    * See #392 and #404
    */
-  protected static final Pattern DEFAULT_CARD_PATTERN = Pattern.compile("#([0-9]+)");
+  protected static Pattern DEFAULT_CARD_PATTERN = Pattern.compile("#([0-9]+)");
 
 
   /**
    * URL of mingle, like <tt>http://mingle:80/</tt>.
    * Mandatory. Normalized to end with '/'
    */
-  public final URL url;
+  public URL url;
 
   /**
    * User name needed to login.
    */
-  public final String userName;
+  public String userName;
 
   /**
    * Password needed to login.
    */
-  public final String password;
+  public String password;
 
   /**
    * Mingle project name. e.g. "scrum".
    */
-  public final String project;
+  public String project;
 
   /**
    * user defined pattern
    */    
-  private final String userPattern;
+  private String userPattern;
   
   private transient Pattern userPat;
 
   /**
    * True if this mingle is configured to allow Confluence-style Wiki comment. Wait? Wat?
    */
-  public final boolean supportsWikiStyleComment;
+  public boolean supportsWikiStyleComment;
 
   // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
@@ -94,7 +95,7 @@ public class MingleRestService {
 
 
   @DataBoundConstructor
-  private MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+  private initiateService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
@@ -116,11 +117,29 @@ public class MingleRestService {
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
-  public static MingleRestService getInstance() {
+  public static MingleRestService getInstance(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
     if ( instance == null ) {
-      instance = new MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment);
+      instance = new MingleRestService();
+      instance.initiateService(url, userName, password, project, userPattern, supportsWikiStyleComment);
+    }
+    else {
+      // Check if the arguments match the instance. If not overwrite the instance.
+      if (url != instance.url || userName.equals(instance.userName) || password.equals(instance.password) || 
+          project.equals(instance.project) || userPattern.equals(instance.userPattern) || 
+          supportsWikiStyleComment != instance.supportsWikiStyleComment ) {
+        instance = null;
+        instance = new MingleRestService();
+        instance.initiateService(url, userName, password, project, userPattern, supportsWikiStyleComment);
+      }
     }
     return instance;
+  }
+
+  public static MingleRestService getInstance() throws IllegalStateException {
+    if ( instance == null ) {
+      throw IllegalStateException("Service is not yet initialized. To initialize more arguments are required.");
+    }
+    else return instance;
   }
 
   public String getUrlAsString() {
