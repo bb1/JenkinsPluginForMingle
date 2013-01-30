@@ -13,9 +13,11 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Arrays;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
-import java.util.Arrays;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.InputStream;
@@ -23,12 +25,15 @@ import java.io.IOException;
 import java.lang.IllegalArgumentException;
 import java.lang.IllegalStateException;
 
+//import javax.servlet.ServletException;
+
+import hudson.util.FormValidation;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-// TODO: Imports for Input/Output Streams etc.
+// TODO: add FormValidation into maven builder config file pom.xml ???
 
 
 /**
@@ -37,7 +42,7 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  * @author Birk Brauer
  * @version 0.7
  */
-public class MingleRestService {
+public class MingleRestService extends AbstractDescribableImpl<MingleRestService>{
 
   private static MingleRestService instance;
 
@@ -94,7 +99,7 @@ public class MingleRestService {
    */
 
 
-  private initiateService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+  private void initiateService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
@@ -116,7 +121,7 @@ public class MingleRestService {
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
-  @DataBoundConstructor
+  //@DataBoundConstructor
   public static MingleRestService getInstance(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
     if ( instance == null ) {
       instance = new MingleRestService();
@@ -137,7 +142,7 @@ public class MingleRestService {
 
   public static MingleRestService getInstance() throws IllegalStateException {
     if ( instance == null ) {
-      throw IllegalStateException("Service is not yet initialized. To initialize more arguments are required.");
+      throw new IllegalStateException("Service is not yet initialized. To initialize more arguments are required.");
     }
     else return instance;
   }
@@ -389,24 +394,52 @@ public class MingleRestService {
     return DEFAULT_CARD_PATTERN;
   } 
 
-  //TODO: get(build) --> session of this service + config?! --> getInstance now!
-
-  //TODO: Get Release Notes from mingle?
+  //TODO: get(build) --> session of this service + config?! --> getInstance now! Does singleton really work here?
 
 
   // DESCRIPTOR:
   @Extension
-  public static class DescriptorImpl extends Descriptor<JiraSite> {
+  public static class DescriptorImpl extends Descriptor<MingleRestService> {
+
     @Override
     public String getDisplayName() {
       return "Mingle Rest Service";
     }
     
+
+    /**
+     * Checks if the content inside the URL contains the given string.
+     */
+    private boolean findTextInUrl(URL url, String text) throws IOException {
+      // opens a http connection to url
+      String resultString = "";
+      HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+      connection.setFollowRedirects(true);
+      connection.setDoInput(false);
+      connection.connect();
+  
+      // save response
+      InputStream is = connection.getInputStream();
+      Scanner scanner = new Scanner(is, "UTF-8").useDelimiter("\\A"); // or "\\Z" ?
+      if (scanner.hasNext()) {
+        try {
+          resultString = scanner.next();
+        } catch (java.util.NoSuchElementException e) {
+          resultString = "";
+        }
+      }
+      
+      // actual check
+      if (resultString.indexOf(text) != -1)  return true;
+      return false;
+    }
+
+
     /**
      * Checks if the Mingle URL is accessible and exists.
      */
     public FormValidation doUrlCheck(@QueryParameter final String value)
-      throws IOException, ServletException {
+      throws IOException {
       // this can be used to check existence of any file in any URL, so
       // admin only
       if (!Hudson.getInstance().hasPermission(Hudson.ADMINISTER))
@@ -414,28 +447,34 @@ public class MingleRestService {
 
       return new FormValidation.URLCheck() {
         @Override
-        protected FormValidation check() throws IOException, ServletException {
+        protected FormValidation check() throws IOException {
           String url = Util.fixEmpty(value);
           if (url == null) {
             return FormValidation.error("The Mingle URL is a mandatory field!");
           }
+
+          // normalize url with "/" at the end:
+          if (url.charAt( url.length()-1) != '/') {
+            url += "/";
+          }
           
-          // call a uri to check if mingle can be reached
+          // call urls to check if mingle can be reached
           try {
+            URL loginURL = new URL(url + "/profile/login");
             // checks if target url contains the mingle login page
-            if (!findText(open(new URL(url + (url.charAt(url.length()-1)=='/')?"":"/" + "profile/login")), "<title>Login Profile - Mingle</title>") )
+            if (!findTextInUrl(loginURL, "<title>Login Profile - Mingle</title>") )
               return FormValidation.error("This is a valid URL but it doesnt look like mingle.");
-            URL restUrl = new URL(new URL(url), "/api/v2/projects.xml");
-            if (!findText(open(restUrl), "Incorrect username or password."))
+            URL restUrl = new URL(url + "/api/v2/projects.xml");
+            if (!findTextInUrl(restUrl, "Incorrect username or password.") )
               return FormValidation.error("Couln't access the mingle API on the given URL. Please check if the Rest-API is activated.");
             return FormValidation.ok();
           } catch (IOException e) {
-            LOGGER.log(Level.WARNING,
-                    "Unable to connect to " + url, e);
-            return handleIOException(url, e);
+            LOGGER.log(Level.WARNING,"Unable to connect to " + url, e);
+            return FormFieldValidator.error("Unable to connect to " + url);
           }
         }
       }.check();
+    }
     
     public FormValidation doCheckUserPattern(@QueryParameter String value) throws IOException {
       String userPattern = Util.fixEmpty(value);
@@ -448,6 +487,7 @@ public class MingleRestService {
       } catch (PatternSyntaxException e) {
         return FormValidation.error(e.getMessage());
       }
+    }
     
     /**
      * Checks if the user name and password are valid.
@@ -465,24 +505,24 @@ public class MingleRestService {
         try {
           // Check if project exists:
           URL url2 = serv.url;
-          String projectsXML = open(new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
-                               url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml"));
-          if (!findText(projectsXML, "Incorrect username or password."))
+          URL projectsURL = new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
+                               url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml");
+          if (findTextInUrl(projectsURL, "Incorrect username or password.")) {
             LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url);
             return FormValidation.error("Failed to login to mingle at " + url);
-          if (!findText(projectsXML, project))
+          }
+          if (!findTextInUrl(projectsURL, project)) {
+            LOGGER.log(Level.WARNING, "The project name \""+project+"\" can't be found on the mingle server.");
             return FormValidation.error("The project name \""+project+"\" can't be found on the mingle server.");
+          }
           return FormValidation.ok("Success");
-        } catch (AxisFault e) {
-          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
-          return FormValidation.error(e.getFaultString());
-        } catch (ServiceException e) {
+        } catch (IOException e) {
           LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
           return FormValidation.error(e.getMessage());
         }
 
-        //TODO: ServerException? AxisFault? open() and findText()? Need to import something for that..
     }
+
   }
     
   private static final Logger LOGGER = Logger.getLogger(MingleRestService.class.getName());
