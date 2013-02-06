@@ -33,16 +33,13 @@ import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-// TODO: add FormValidation into maven builder config file pom.xml ???
-
-
 /**
  * Class for the Mingle connection using the API v2.
  *
  * @author Birk Brauer
  * @version 0.7
  */
-public class MingleRestService extends AbstractDescribableImpl<MingleRestService>{
+public class MingleRestService extends AbstractDescribableImpl<MingleRestService> {
 
   private static MingleRestService instance;
 
@@ -98,8 +95,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * TODO: How to access the Build from here?
    */
 
-
-  private void initiateService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+  //@DataBoundConstructor
+  MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
   xstream.alias("property", MingleCardProperty.class);
@@ -121,7 +118,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     this.supportsWikiStyleComment = supportsWikiStyleComment;
   }
 
-  //@DataBoundConstructor
+  /*/@DataBoundConstructor
   public static MingleRestService getInstance(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
     if ( instance == null ) {
       instance = new MingleRestService();
@@ -145,9 +142,29 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       throw new IllegalStateException("Service is not yet initialized. To initialize more arguments are required.");
     }
     else return instance;
+  }*/
+
+  /**
+   * Gets the effective {@link MingleRestService} associated with the given project.
+   *
+   * @return null
+   *      if no such was found.
+   */
+  public static MingleRestService get(AbstractProject<?,?> p) {
+      MingleProjectProperty jpp = p.getProperty(MingleProjectProperty.class);
+      if(jpp!=null) {
+          MingleRestService site = jpp.getSite();
+          if(site!=null)
+              return site;
+      }
+      // none is explicitly configured. try the default ---
+      // if only one is configured, that must be it.
+      MingleRestService[] sites = MingleProjectProperty.DESCRIPTOR.getSites();
+      if(sites.length==1) return sites[0];
+      return null;
   }
 
-  public String getUrlAsString() {
+  public String getName() {
     return url.toExternalForm();
   }
 
@@ -355,7 +372,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
        * is a URL to the updated resource."
        */
   
-      //get the LOCCATION ATTRIBUTE from the HTTP Header:
+      //get the LOCATION ATTRIBUTE from the HTTP Header:
       if (resultString == "") resultString = connection.getHeaderField("Location");
 
     }
@@ -393,8 +410,6 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     
     return DEFAULT_CARD_PATTERN;
   } 
-
-  //TODO: get(build) --> session of this service + config?! --> getInstance now! Does singleton really work here?
 
 
   // DESCRIPTOR:
@@ -470,7 +485,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
             return FormValidation.ok();
           } catch (IOException e) {
             LOGGER.log(Level.WARNING,"Unable to connect to " + url, e);
-            return FormFieldValidator.error("Unable to connect to " + url);
+            return FormValidation.error("Unable to connect to " + url);
           }
         }
       }.check();
@@ -501,7 +516,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
         if (url == null) {// URL not entered yet
           return FormValidation.error("No URL given");
         }
-        MingleRestService serv = MingleRestService.getInstance(new URL(url), userName, password, null, null, false);
+        MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
         try {
           // Check if project exists:
           URL url2 = serv.url;
