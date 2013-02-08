@@ -1,5 +1,5 @@
 maven-plugin
-ui-samples-plugin
+subversion
 javadoc
 ant
-subversion
+ui-samples-plugin

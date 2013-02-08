@@ -2,24 +2,24 @@
   <f:entry title="URL" field="url">
     <f:textbox />
   </f:entry>
-  <f:entry title="${%Supports Wiki notation}" field="supportsWikiStyleComment">
+  <f:entry title="supports wiki style comments" field="supportsWikiStyleComment">
     <f:checkbox />
   </f:entry>
-  <f:entry title="${%Card Pattern}" field="userPattern">
+  <f:entry title="Card Pattern" field="userPattern">
     <f:textbox />
   </f:entry>
-  <f:entry title="${%User Name}" field="userName">
+  <f:entry title="User Name" field="userName">
     <f:textbox />
   </f:entry>
-  <f:entry title="${%Password}" field="password"
-      description="${%username.password.description}">
+  <f:entry title="Password" field="password"
+      description="">
     <f:password />
   </f:entry>
   <f:entry title="Project Name" field="project">
     <f:textbox />
   </f:entry>
   <f:entry>
-    <f:validateButton title="${%Validate Settings}"
+    <f:validateButton title="check settings"
             method="validate" with="url,userName,password,project" />
   </f:entry>
   <f:entry title="">

@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.io.InputStreamReader;
@@ -181,11 +183,20 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  */
   public URL generateRestUrl(String action) throws MalformedURLException {
     String url_s;
-    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+url.getPort();
+
+    int port = url.getPort();
+    if (port == -1) port = url.getDefaultPort(); // if no port set use default
+    if (port == -1) port = 80; // if no default is set for protocol use 80 because it's a REST call
+
+    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+port;
+
+    // if a path is given add it:
     if (! "".equals(url.getPath()) ) {
       url_s += "/"+url.getPath();
     }
-    url_s += "/api/v2/projects/"+project+"/"+action;
+
+    url_s += "/api/v2/projects/"+action;
+
     return new URL(url_s);
   }
 
@@ -199,12 +210,21 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public URL getCardUrl(int cardnumber) throws MalformedURLException {
     String url_s;
     String protocol = url.getProtocol();
+
+    int port = url.getPort();
+    if (port == -1) port = url.getDefaultPort(); // if no port set use default
+    if (port == -1) port = 80; // if no default is set for protocol use 80 because it's a REST call
+
     if ( !(protocol.equals("http") || protocol.equals("https")) ) protocol = "http";
-    url_s = protocol+"://"+url.getHost()+":"+url.getPort();
+    
+    url_s = protocol+"://"+url.getHost()+":"+port;
+
     if (! "".equals(url.getPath()) ) {
       url_s += "/"+url.getPath();
     }
+
     url_s += "/projects/"+project+"/cards/"+cardnumber;
+
     return new URL(url_s);
   }
 
@@ -220,7 +240,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml;
 
     try {
-      xml = doMingleCall(generateRestUrl("cards/"+number+".xml"), "GET" , null);
+      xml = doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "GET" , null);
     } catch (MalformedURLException e) {
       return null;
     }
@@ -243,7 +263,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
     String xml = xstream.toXML(card);
     try {
-      URL url = new URL (doMingleCall(generateRestUrl("cards/"+number+".xml"), "PUT", xml));
+      URL url = new URL (doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "PUT", xml));
     } catch (MalformedURLException e) {
       throw new IllegalArgumentException();
     }
@@ -264,7 +284,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
     // creates a new card:
-    URL url = new URL(doMingleCall(generateRestUrl("cards.xml"), "POST", xml));
+    URL url = new URL(doMingleCall(generateRestUrl(project+"/cards.xml"), "POST", xml));
     
     return url;
   }
@@ -304,15 +324,43 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
   public void deleteCardByNumber(int number) {
     try {
-      URL url = new URL (doMingleCall(generateRestUrl("cards/"+number+".xml"), "DELETE", null));
+      URL url = new URL (doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "DELETE", null));
     } catch (MalformedURLException e) {
       // nix
     }
-    //TODO: delte card in local Java cache... but there is no cache yet.
+    //TODO: delte card in local Java cache... but there is no cache yet?
   }
 
   //TODO: Do we need: Method getListOfCards(view, page, filters[], sort, order, tagged_with ) and so on?
 
+/**
+ * Gets all projects from the server
+ *
+ * @return List<MingleProject> ArrayList of Strings with the names of all available projects on this mingle server
+ */
+  public List<MingleProject> getProjects() {
+    String url_s;
+
+    int port = url.getPort();
+    if (port == -1) port = url.getDefaultPort(); // if no port set use default
+    if (port == -1) port = 80; // if no default is set for protocol use 80 because it's a REST call
+
+    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+port;
+
+    // if a path is given add it:
+    if (! "".equals(url.getPath()) ) {
+      url_s += "/"+url.getPath();
+    }
+
+    url_s += "api/v2/projects.xml";
+
+    String xml = doMingleCall(new URL(url_s), "GET", null);
+    //TODO: Try+Catch!
+    List projects = new ArrayList<MingleProject>();
+    projects = (ArrayList<MingleProject>)xstream.fromXML(xml);
+
+    return projects;
+  }
 
 /**
  * Performs a REST call on the mingle server and returns a XML string if we requested a ressource or a link
@@ -430,7 +478,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       String resultString = "";
       HttpURLConnection connection = (HttpURLConnection)url.openConnection();
       connection.setFollowRedirects(true);
-      connection.setDoInput(false);
+      connection.setDoOutput(false);
       connection.connect();
   
       // save response
@@ -519,9 +567,10 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
         MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
         try {
           // Check if project exists:
-          URL url2 = serv.url;
-          URL projectsURL = new URL(url2.getProtocol()+"://"+userName+":"+password+"@"+
-                               url2.getHost()+":"+url2.getPort()+"/"+url2.getPath()+"api/v2/projects.xml");
+
+          // TODO:Refactoring: replace all the following with List<MingleProject> projects = serv.getProjects(); + catch errors + iterate and check if it exists
+
+          URL projectsURL = serv.generateRestUrl("api/v2/projects.xml");
           if (findTextInUrl(projectsURL, "Incorrect username or password.")) {
             LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url);
             return FormValidation.error("Failed to login to mingle at " + url);

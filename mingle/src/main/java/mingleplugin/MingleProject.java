@@ -1,12 +1,22 @@
 package mingleplugin;
 
+import java.util.Date;
+
 class MingleProject extends MingleObject{
   
   private String mingleObjectType = "MingleProject";
 
   private String name;
   private String identifier;
-
+  private String description;
+  private String[] keywords;
+  private Boolean template;
+  // set by mingle server:
+  private final Date created_at;
+  private final Date updated_at;
+  private final MingleUser created_by;
+  private final MingleUser modified_by;
+  private final String date_format;
 
   public String getName()
   {
@@ -28,9 +38,29 @@ class MingleProject extends MingleObject{
     this.identifier = identifier;
   }
 
-  MingleProject(String name, String identifier) {
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription( String name )
+  {
+    this.description = description;
+  }  
+
+  MingleProject(String name, String identifier, String description, String[] keywords,
+                Boolean template, Date created_at, Date updated_at, MingleUser created_by,
+                MingleUser modified_by, String date_format) {
     this.name = name;
     this.identifier = identifier;
+    this.description = description;
+    this.keywords = keywords;
+    this.template = template;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+    this.created_by = created_by;
+    this.modified_by = modified_by;
+    this.date_format = date_format;
   }
 
 }

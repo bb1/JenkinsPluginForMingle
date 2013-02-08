@@ -79,7 +79,7 @@ public class MingleProjectProperty extends JobProperty<AbstractProject<?, ?>> {
 
 		@Override
 		public String getDisplayName() {
-			return Messages.MingleProjectProperty_DisplayName();
+			return "Associated Mingle";
 		}
 
 		public void setSites(MingleRestService site) {
