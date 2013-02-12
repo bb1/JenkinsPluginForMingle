@@ -191,11 +191,11 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+port;
 
     // if a path is given add it:
-    if (! "".equals(url.getPath()) ) {
+    if (!url.getPath().equals("") && !url.getPath().equals("/") ) {
       url_s += "/"+url.getPath();
     }
 
-    url_s += "/api/v2/projects/"+action;
+    url_s += "/"+action;
 
     return new URL(url_s);
   }
@@ -340,6 +340,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  */
   public List<MingleProject> getProjects() {
     String url_s;
+    List projects = new ArrayList<MingleProject>();
 
     int port = url.getPort();
     if (port == -1) port = url.getDefaultPort(); // if no port set use default
@@ -354,10 +355,12 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
     url_s += "api/v2/projects.xml";
 
-    String xml = doMingleCall(new URL(url_s), "GET", null);
-    //TODO: Try+Catch!
-    List projects = new ArrayList<MingleProject>();
-    projects = (ArrayList<MingleProject>)xstream.fromXML(xml);
+    try {
+      String xml = doMingleCall(new URL(url_s), "GET", null);
+      projects = (ArrayList<MingleProject>)xstream.fromXML(xml);
+    } catch(MalformedURLException e) {
+      return null;
+    }
 
     return projects;
   }
@@ -523,11 +526,11 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
           
           // call urls to check if mingle can be reached
           try {
-            URL loginURL = new URL(url + "/profile/login");
+            URL loginURL = new URL(url + "profile/login");
             // checks if target url contains the mingle login page
             if (!findTextInUrl(loginURL, "<title>Login Profile - Mingle</title>") )
               return FormValidation.error("This is a valid URL but it doesnt look like mingle.");
-            URL restUrl = new URL(url + "/api/v2/projects.xml");
+            URL restUrl = new URL(url + "api/v2/projects.xml");
             if (!findTextInUrl(restUrl, "Incorrect username or password.") )
               return FormValidation.error("Couln't access the mingle API on the given URL. Please check if the Rest-API is activated.");
             return FormValidation.ok();
@@ -565,6 +568,9 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
           return FormValidation.error("No URL given");
         }
         MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
+
+        project = project.replaceAll("\\W", "_").toLowerCase();
+
         try {
           // Check if project exists:
 
