@@ -534,7 +534,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
             if (!findTextInUrl(restUrl, "Incorrect username or password.") )
               return FormValidation.error("Couln't access the mingle API on the given URL. Please check if the Rest-API is activated.");
             return FormValidation.ok();
-          } catch (IOException e) {
+          } catch (IOException e) { // why catch it here when it is thrown anyway?
             LOGGER.log(Level.WARNING,"Unable to connect to " + url, e);
             return FormValidation.error("Unable to connect to " + url);
           }
@@ -586,6 +586,10 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
             return FormValidation.error("The project name \""+project+"\" can't be found on the mingle server.");
           }
           return FormValidation.ok("Success");
+        } catch (MalformedURLException e) {
+          LOGGER.log(Level.WARNING, "Could not create a valid URL like that: " + url, e);
+          return FormValidation.error(e.getMessage());
+        }
         } catch (IOException e) {
           LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
           return FormValidation.error(e.getMessage());
