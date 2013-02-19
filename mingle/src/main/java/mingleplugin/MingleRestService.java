@@ -188,7 +188,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     if (port == -1) port = url.getDefaultPort(); // if no port set use default
     if (port == -1) port = 80; // if no default is set for protocol use 80 because it's a REST call
 
-    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+port;
+    url_s = url.getProtocol()+"://"+url.getHost()+":"+port;
 
     // if a path is given add it:
     if (!url.getPath().equals("") && !url.getPath().equals("/") ) {
@@ -240,7 +240,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml;
 
     try {
-      xml = doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "GET" , null);
+      xml = doMingleCall(project+"/cards/"+number+".xml", "GET" , null);
     } catch (MalformedURLException e) {
       return null;
     }
@@ -263,7 +263,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
     String xml = xstream.toXML(card);
     try {
-      URL url = new URL (doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "PUT", xml));
+      URL url = new URL (doMingleCall(project+"/cards/"+number+".xml", "PUT", xml));
     } catch (MalformedURLException e) {
       throw new IllegalArgumentException();
     }
@@ -284,7 +284,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
     // creates a new card:
-    URL url = new URL(doMingleCall(generateRestUrl(project+"/cards.xml"), "POST", xml));
+    URL url = new URL(doMingleCall(project+"/cards.xml", "POST", xml));
     
     return url;
   }
@@ -324,7 +324,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
   public void deleteCardByNumber(int number) {
     try {
-      URL url = new URL (doMingleCall(generateRestUrl(project+"/cards/"+number+".xml"), "DELETE", null));
+      URL url = new URL (doMingleCall(project+"/cards/"+number+".xml", "DELETE", null));
     } catch (MalformedURLException e) {
       // nix
     }
@@ -376,7 +376,10 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @return String XML object that can be parsed as a MingleObject if this was requested or a URL to the 
  *                ressource which has just been updated. Returns an empty string if an IO error occurs.
  */
-  public String doMingleCall(URL url, String method, String xml) {
+  public String doMingleCall(String url_s, String method, String xml) {
+
+    URL url = generateRestUrl(url_s);
+
     // Default HTTP method is GET:
     if (method == null) method = "GET";
 
@@ -384,17 +387,24 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
     try {
       // Set up connection:
-      //HttpURLConnection connection = new HttpURLConnection(url);
       HttpURLConnection connection = (HttpURLConnection)url.openConnection();
       connection.setDoInput(true);
+
       if (xml != null) connection.setDoOutput(true);
-      else method = "GET"; // if nothing to update/delete is given it's obviously that we should use GET
+      // if UserName and password is set we need a output and authentication
+      if (userName != null && !userName.trim().isEmpty() && 
+          password != null && !password.trim().isEmpty() ) {
+        connection.setDoOutput(true);
+        String userPassword = userName + ":" + password;
+        String encoding = new sun.misc.BASE64Encoder().encode(userPassword.getBytes());
+        connection.setRequestProperty("Authorization", "Basic " + encoding);
+      }
     
       // Checks for valid Http method. Mingle supports: GET, POST, PUT or DELETE.
       if (method == "GET" || method == "POST" || method == "PUT" || method == "DELETE") {
         connection.setRequestMethod(method);
       }
-      else throw new ProtocolException();
+      else connection.setRequestMethod("GET");
       connection.setFollowRedirects(true);
       connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); // maybe with "; charset=utf-8" in the end?
       connection.connect();
@@ -445,9 +455,6 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     }
     
     if (userPat == null) {
-      // We don't care about any thread race- or visibility issues here.
-      // The worst thing which could happen, is that the pattern
-      // is compiled multiple times.
       Pattern p = Pattern.compile(userPattern);
       userPat = p;
     }
@@ -576,7 +583,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
           // TODO:Refactoring: replace all the following with List<MingleProject> projects = serv.getProjects(); + catch errors + iterate and check if it exists
 
-          URL projectsURL = serv.generateRestUrl("api/v2/projects.xml");
+          URL projectsURL = serv.doMingleCall("api/v2/projects.xml", "GET", null);
           if (findTextInUrl(projectsURL, "Incorrect username or password.")) {
             LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url);
             return FormValidation.error("Failed to login to mingle at " + url);
@@ -589,9 +596,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
         } catch (MalformedURLException e) {
           LOGGER.log(Level.WARNING, "Could not create a valid URL like that: " + url, e);
           return FormValidation.error(e.getMessage());
-        }
         } catch (IOException e) {
-          LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url, e);
+          LOGGER.log(Level.WARNING, "Failed to process the mingle server answer at " + url, e);
           return FormValidation.error(e.getMessage());
         }
 
