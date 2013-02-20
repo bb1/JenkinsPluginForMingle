@@ -43,8 +43,6 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
  */
 public class MingleRestService extends AbstractDescribableImpl<MingleRestService> {
 
-  private static MingleRestService instance;
-
   /**
    * Regexp pattern that identifies Mingle Card.
    * If this pattern changes help pages (help-issue-pattern_xy.html) must be updated 
@@ -59,27 +57,27 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * URL of mingle, like <tt>http://mingle:80/</tt>.
    * Mandatory. Normalized to end with '/'
    */
-  public URL url;
+  public final URL url;
 
   /**
    * User name needed to login.
    */
-  public String userName;
+  public final String userName;
 
   /**
    * Password needed to login.
    */
-  public String password;
+  public final String password;
 
   /**
    * Mingle project name. e.g. "scrum".
    */
-  public String project;
+  public final String project;
 
   /**
    * user defined pattern
    */    
-  private String userPattern;
+  private final String userPattern;
   
   private transient Pattern userPat;
 
@@ -118,7 +116,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     this.userPattern = (userPattern == "") ? null : userPattern;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
 
-    if (project == "") project = null; // if project is empty we still can get the projects from the server
+    if (project == null || project == "") project = null; // if project is empty we still can get the projects from the server
     else project = project.replaceAll("\\W", "_").toLowerCase();
     this.project = project;
   }
@@ -197,6 +195,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL getCardUrl(int cardnumber) throws MalformedURLException {
+    if (project == null) throw new MalformedURLException("No project given yet");
+
     String url_s;
     String protocol = url.getProtocol();
 
@@ -226,6 +226,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @return MingleCard Returns a mingle card by it's unique number. Returns null if the request failed or the URL is wrong.
  */
   public MingleCard getCard(int number) {
+    if (project == null) return null;
+
     String xml;
 
     try {
@@ -248,8 +250,9 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @trows IllegalArgumentException throws an IllegalArgumentException if any of the passed parameters is invalid.
  */
   public void updateCardByNumber(int number, MingleCard card) throws IllegalArgumentException {
-    // Converts a MingleCard to a XML String.
+    if (project == null) throw new IllegalArgumentException("No project given yet");
 
+    // Converts a MingleCard to a XML String.
     String xml = xstream.toXML(card);
     try {
       URL url = new URL (doMingleCall("projects/"+project+"/cards/"+number+".xml", "PUT", xml));
@@ -269,6 +272,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @throws MalformedURLException thrown if the returned URL by mingle is invalid.
  */
   public URL createEmptyCard(String name, String cardtype) throws MalformedURLException {
+    if (project == null) throw new MalformedURLException("No project given yet");
+
     // generates XML-string for card creation:
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
@@ -314,6 +319,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public void deleteCardByNumber(int number) {
     try {
       URL url = new URL (doMingleCall("projects/"+project+"/cards/"+number+".xml", "DELETE", null));
+    } catch (NullPointerException e) {
+      // nix, da kein Project angegeben
     } catch (MalformedURLException e) {
       // nix
     }
