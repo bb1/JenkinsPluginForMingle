@@ -97,7 +97,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * TODO: How to access the Build from here?
    */
 
-  //@DataBoundConstructor
+  @DataBoundConstructor
   MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
   xstream.alias("card", MingleCard.class);
@@ -115,36 +115,13 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     this.url = url;
     this.userName = (userName == "") ? null : userName;
     this.password = (password == "") ? null : password;
-    this.project = (project == "") ? null : project;
     this.userPattern = (userPattern == "") ? null : userPattern;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
-  }
 
-  /*/@DataBoundConstructor
-  public static MingleRestService getInstance(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
-    if ( instance == null ) {
-      instance = new MingleRestService();
-      instance.initiateService(url, userName, password, project, userPattern, supportsWikiStyleComment);
-    }
-    else {
-      // Check if the arguments match the instance. If not overwrite the instance.
-      if (url != instance.url || userName.equals(instance.userName) || password.equals(instance.password) || 
-          project.equals(instance.project) || userPattern.equals(instance.userPattern) || 
-          supportsWikiStyleComment != instance.supportsWikiStyleComment ) {
-        instance = null;
-        instance = new MingleRestService();
-        instance.initiateService(url, userName, password, project, userPattern, supportsWikiStyleComment);
-      }
-    }
-    return instance;
+    if (project == "") project = null; // if project is empty we still can get the projects from the server
+    else project = project.replaceAll("\\W", "_").toLowerCase();
+    this.project = project;
   }
-
-  public static MingleRestService getInstance() throws IllegalStateException {
-    if ( instance == null ) {
-      throw new IllegalStateException("Service is not yet initialized. To initialize more arguments are required.");
-    }
-    else return instance;
-  }*/
 
   /**
    * Gets the effective {@link MingleRestService} associated with the given project.
@@ -182,6 +159,17 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @throws MalformedURLException thrown if there is a error inside any part of the URL.
  */
   public URL generateRestUrl(String action) throws MalformedURLException {
+    // if the given path already has a protocol included it's mostlikly already a valid URL
+    if (action.indexOf("://") != -1) {
+      try {
+        URL url_t = new URL(action);
+        return url_t;
+      } catch (MalformedURLException e) {
+        // if not, do nothing just let rest of the function generate a URL
+        // maybe it's just part of a parameter like "?img=http://""
+      }
+    }
+
     String url_s;
 
     int port = url.getPort();
@@ -195,7 +183,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       url_s += "/"+url.getPath();
     }
 
-    url_s += "/"+action;
+    if (action.charAt(0) == '/') action = action.substring(1);
+    url_s += "/api/v2/"+action;
 
     return new URL(url_s);
   }
@@ -240,7 +229,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml;
 
     try {
-      xml = doMingleCall(project+"/cards/"+number+".xml", "GET" , null);
+      xml = doMingleCall("projects/"+project+"/cards/"+number+".xml", "GET" , null);
     } catch (MalformedURLException e) {
       return null;
     }
@@ -263,7 +252,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
     String xml = xstream.toXML(card);
     try {
-      URL url = new URL (doMingleCall(project+"/cards/"+number+".xml", "PUT", xml));
+      URL url = new URL (doMingleCall("projects/"+project+"/cards/"+number+".xml", "PUT", xml));
     } catch (MalformedURLException e) {
       throw new IllegalArgumentException();
     }
@@ -284,7 +273,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String xml = "<card><name>"+name+"</name><card_type_name>"+cardtype+"</card_type_name></card>";
 
     // creates a new card:
-    URL url = new URL(doMingleCall(project+"/cards.xml", "POST", xml));
+    URL url = new URL(doMingleCall("projects/"+project+"/cards.xml", "POST", xml));
     
     return url;
   }
@@ -324,7 +313,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
   public void deleteCardByNumber(int number) {
     try {
-      URL url = new URL (doMingleCall(project+"/cards/"+number+".xml", "DELETE", null));
+      URL url = new URL (doMingleCall("projects/"+project+"/cards/"+number+".xml", "DELETE", null));
     } catch (MalformedURLException e) {
       // nix
     }
@@ -332,6 +321,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   }
 
   //TODO: Do we need: Method getListOfCards(view, page, filters[], sort, order, tagged_with ) and so on?
+  //TODO: Create filter with MQL for /projects/new/cards/execute_mql.xml --> http://www.thoughtworks-studios.com/docs/mingle/12.2/help/mingle_api_execute_mql.html
 
 /**
  * Gets all projects from the server
@@ -342,21 +332,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String url_s;
     List projects = new ArrayList<MingleProject>();
 
-    int port = url.getPort();
-    if (port == -1) port = url.getDefaultPort(); // if no port set use default
-    if (port == -1) port = 80; // if no default is set for protocol use 80 because it's a REST call
-
-    url_s = url.getProtocol()+"://"+userName+":"+password+"@"+url.getHost()+":"+port;
-
-    // if a path is given add it:
-    if (! "".equals(url.getPath()) ) {
-      url_s += "/"+url.getPath();
-    }
-
-    url_s += "api/v2/projects.xml";
-
     try {
-      String xml = doMingleCall(new URL(url_s), "GET", null);
+      String xml = doMingleCall("projects.xml", "GET", null);
       projects = (ArrayList<MingleProject>)xstream.fromXML(xml);
     } catch(MalformedURLException e) {
       return null;
@@ -376,7 +353,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
  * @return String XML object that can be parsed as a MingleObject if this was requested or a URL to the 
  *                ressource which has just been updated. Returns an empty string if an IO error occurs.
  */
-  public String doMingleCall(String url_s, String method, String xml) {
+  public String doMingleCall(String url_s, String method, String xml) throws MalformedURLException {
 
     URL url = generateRestUrl(url_s);
 
@@ -583,18 +560,17 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
           // TODO:Refactoring: replace all the following with List<MingleProject> projects = serv.getProjects(); + catch errors + iterate and check if it exists
 
-          URL projectsURL = serv.doMingleCall("api/v2/projects.xml", "GET", null);
-          if (findTextInUrl(projectsURL, "Incorrect username or password.")) {
+          String projectsXML = serv.doMingleCall("projects.xml", "GET", null);
+          if (projectsXML.indexOf("Incorrect username or password.") != -1) {
             LOGGER.log(Level.WARNING, "Failed to login to mingle at " + url);
             return FormValidation.error("Failed to login to mingle at " + url);
           }
-          if (!findTextInUrl(projectsURL, project)) {
+          if (projectsXML.indexOf(project) == -1) {
             LOGGER.log(Level.WARNING, "The project name \""+project+"\" can't be found on the mingle server.");
             return FormValidation.error("The project name \""+project+"\" can't be found on the mingle server.");
-          }
-          return FormValidation.ok("Success");
+          } else return FormValidation.ok("Success");
         } catch (MalformedURLException e) {
-          LOGGER.log(Level.WARNING, "Could not create a valid URL like that: " + url, e);
+          LOGGER.log(Level.WARNING, "Could not create a valid URL: " + url, e);
           return FormValidation.error(e.getMessage());
         } catch (IOException e) {
           LOGGER.log(Level.WARNING, "Failed to process the mingle server answer at " + url, e);
