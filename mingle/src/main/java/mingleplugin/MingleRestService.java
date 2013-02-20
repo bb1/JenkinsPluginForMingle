@@ -113,8 +113,14 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     this.url = url;
     this.userName = (userName == "") ? null : userName;
     this.password = (password == "") ? null : password;
-    this.userPattern = (userPattern == "") ? null : userPattern;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
+
+    this.userPattern = Util.fixEmpty(userPattern);
+    if (this.userPattern != null) {
+      this.userPat = Pattern.compile(this.userPattern);
+    } else {
+      this.userPat = null;
+    }
 
     if (project == null || project == "") project = null; // if project is empty we still can get the projects from the server
     else project = project.replaceAll("\\W", "_").toLowerCase();
