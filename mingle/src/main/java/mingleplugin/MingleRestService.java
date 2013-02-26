@@ -84,7 +84,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   /**
    * True if this mingle is configured to allow Confluence-style Wiki comment. Wait? Wat?
    */
-  public boolean supportsWikiStyleComment;
+  public final boolean supportsWikiStyleComment;
 
   // XStream set up:
   XStream xstream = new XStream(new StaxDriver());
@@ -95,13 +95,23 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * TODO: How to access the Build from here?
    */
 
-  @DataBoundConstructor
-  MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+  public MingleRestService(String url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+    URL url2;
+    try {
+      url2 = new URL(url);
+    } catch(MalformedURLException e) {
+      url2 = null;
+    }
+    MingleRestService(url2, userName, password, project, userPattern, supportsWikiStyleComment);
+  }
 
-  xstream.alias("card", MingleCard.class);
-  xstream.alias("property", MingleCardProperty.class);
-  xstream.alias("project", MingleProject.class);
-  xstream.alias("user", MingleUser.class);
+  @DataBoundConstructor
+  public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
+
+    xstream.alias("card", MingleCard.class);
+    xstream.alias("property", MingleCardProperty.class);
+    xstream.alias("project", MingleProject.class);
+    xstream.alias("user", MingleUser.class);
 
     if(!url.toExternalForm().endsWith("/")) {
       try {
@@ -111,6 +121,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       }
     }
     this.url = url;
+
     this.userName = (userName == "") ? null : userName;
     this.password = (password == "") ? null : password;
     this.supportsWikiStyleComment = supportsWikiStyleComment;
@@ -555,8 +566,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     /**
      * Checks if the user name and password are valid.
      */
-    public FormValidation doValidate( @QueryParameter String userName,
-                                      @QueryParameter String url,
+    public FormValidation doValidate( @QueryParameter String url,
+                                      @QueryParameter String userName,
                                       @QueryParameter String password,
                                       @QueryParameter String project)
                 throws IOException {
