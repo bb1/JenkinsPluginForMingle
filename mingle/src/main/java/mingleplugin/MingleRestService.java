@@ -95,14 +95,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * TODO: How to access the Build from here?
    */
 
-  public MingleRestService(String url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
-    URL url2;
-    try {
-      url2 = new URL(url);
-    } catch(MalformedURLException e) {
-      url2 = null;
-    }
-    MingleRestService(url2, userName, password, project, userPattern, supportsWikiStyleComment);
+  public MingleRestService(String url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) throws MalformedURLException {
+    this(new URL(url), userName, password, project, userPattern, supportsWikiStyleComment);
   }
 
   @DataBoundConstructor
