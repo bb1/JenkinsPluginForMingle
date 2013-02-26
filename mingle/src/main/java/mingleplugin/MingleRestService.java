@@ -95,6 +95,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    * TODO: How to access the Build from here?
    */
 
+
+  // This was needed because a URL in JSON is just a String!
   public MingleRestService(String url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) throws MalformedURLException {
     this(new URL(url), userName, password, project, userPattern, supportsWikiStyleComment);
   }
