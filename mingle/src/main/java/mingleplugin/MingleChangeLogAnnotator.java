@@ -31,7 +31,7 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
 
     LOGGER.info("Started ChangeLogAnnotator");
 
-    MingleRestService serv = getMingleServiceForProject(build.getProject());
+    MingleRestService serv = MingleRestService.get(build.getProject());
     if(serv==null) return;    // not configured with Mingle
 
     // if there's any recorded detail information, try to use that, too.
