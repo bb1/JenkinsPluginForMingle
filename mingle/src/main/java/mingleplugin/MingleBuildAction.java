@@ -13,6 +13,8 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
 * Mingle cards related to the build.
@@ -45,6 +47,19 @@ public class MingleBuildAction implements Action {
     public String getUrlName() {
         return "mingle";
     }
+
+
+/**
+ * Returns all ID connected to the build.
+ */
+  public List<Integer> getCardIds() {
+    List<Integer> ids = new ArrayList<Integer>();
+    for (MingleCard card : cards) {
+      ids.add(card.getNumber());
+    }
+    return ids;
+  }
+
 
 /**
  * Finds {@link MingleCard} whose ID matches the given one.
