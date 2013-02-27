@@ -603,4 +603,5 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   }
     
   private static final Logger LOGGER = Logger.getLogger(MingleRestService.class.getName());
+  // just to create test commit
 }

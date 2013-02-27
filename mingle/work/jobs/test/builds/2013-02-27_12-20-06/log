@@ -1,0 +1,10 @@
+Gestartet durch Benutzer [8mha:AAAAih+LCAAAAAAAAABb85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyT1dMUiOWdZ/mImBiZPBrac1Lz0kgwfBubSopwSBiGfrMSyRP2cxLx0/eCSosy8dOuKIgYpNOOcITTIMAYIYGRiYKgoADI4Sxi49EuLU4v080pzcgCbGluCjwAAAA==[0manonymous
+Building in workspace /home/birk/src/Jenkins mingle plugin/mingle/work/jobs/test/workspace
+Checkout:workspace / /home/birk/src/Jenkins mingle plugin/mingle/work/jobs/test/workspace - hudson.remoting.LocalChannel@5236151c
+Using strategy: Default
+Last Built Revision: Revision 312bd5004fbf1a268ca087b5175772faf29e144b (origin/master)
+Fetching changes from 1 remote Git repository
+Fetching upstream changes from origin
+Commencing build of Revision d163f09398e80a9d303fc4320d3e143c6660a60c (origin/master)
+Checking out Revision d163f09398e80a9d303fc4320d3e143c6660a60c (origin/master)
+Finished: SUCCESS
