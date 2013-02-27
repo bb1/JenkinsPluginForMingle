@@ -65,10 +65,4 @@ public class MingleBuildAction implements Action {
         this.cards = allCard.toArray(new MingleCard[allCard.size()]);
     }
 
-/**
- * Finds {@link MingleCard} whose ID matches the given one.
- */
-    public MingleRestService getService() {
-        return service;
-    }
 }

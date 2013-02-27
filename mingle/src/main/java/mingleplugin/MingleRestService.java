@@ -221,7 +221,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     
     url_s = protocol+"://"+url.getHost()+":"+port;
 
-    if (! "".equals(url.getPath()) ) {
+    // if a path is given add it:
+    if (!url.getPath().equals("") && !url.getPath().equals("/") ) {
       url_s += "/"+url.getPath();
     }
 
