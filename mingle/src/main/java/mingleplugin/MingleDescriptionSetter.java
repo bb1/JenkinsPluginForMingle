@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DescriptionSetterPublisher extends Recorder {
+public class MingleDescriptionSetter extends Recorder {
 
   @Override
   public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
@@ -23,6 +23,7 @@ public class DescriptionSetterPublisher extends Recorder {
   	MingleRestService service = MingleRestService.get(build);
 
   	//TODO: get Actions? How many Actions are performed? In which step the changelog is processed?
+    //TODO: getProjectAction(build) doesnt work even if it shoudl arcording to the jenkins documentation
   	MingleBuildAction action = (MingleBuildAction) getProjectAction(build);
   	List<Integer> cardIds = action.getCardIds();
     Iterator<Integer> myListIterator = cardIds.iterator(); 
@@ -37,6 +38,10 @@ public class DescriptionSetterPublisher extends Recorder {
     listener.getLogger().println("Description set: " + newDescription);
     build.setDescription(newDescription);
     //
+  }
+
+  public BuildStepMonitor getRequiredMonitorService() {
+    return BuildStepMonitor.NONE;
   }
 
 }
