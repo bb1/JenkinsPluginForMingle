@@ -1,0 +1,1754 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mingleplugin.MingleProjectProperty_-DescriptorImpl>
+  <helpRedirect/>
+  <sites>
+    <mingleplugin.MingleRestService>
+      <url>http://mingle/</url>
+      <userName>birk</userName>
+      <password>Wae6ohl8</password>
+      <project>scrum__with_two_teams_</project>
+      <supportsWikiStyleComment>false</supportsWikiStyleComment>
+      <xstream>
+        <reflectionProvider class="com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider">
+          <fieldDictionary>
+            <sorter class="com.thoughtworks.xstream.converters.reflection.ImmutableFieldKeySorter"/>
+          </fieldDictionary>
+        </reflectionProvider>
+        <hierarchicalStreamDriver class="com.thoughtworks.xstream.io.xml.StaxDriver">
+          <replacer>
+            <dollarReplacement>_-</dollarReplacement>
+            <underscoreReplacement>__</underscoreReplacement>
+          </replacer>
+          <qnameMap>
+            <defaultPrefix></defaultPrefix>
+            <defaultNamespace></defaultNamespace>
+          </qnameMap>
+        </hierarchicalStreamDriver>
+        <classLoaderReference resolves-to="com.thoughtworks.xstream.core.util.ClassLoaderReference$Replacement"/>
+        <marshallingStrategy class="com.thoughtworks.xstream.core.ReferenceByXPathMarshallingStrategy">
+          <mode>0</mode>
+        </marshallingStrategy>
+        <converterLookup class="com.thoughtworks.xstream.core.DefaultConverterLookup">
+          <converters>
+            <set class="tree-set">
+              <no-comparator/>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.basic.NullConverter"/>
+                <priority>10000</priority>
+                <id>4</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.reflection.SelfStreamingInstanceChecker">
+                  <self class="com.thoughtworks.xstream.XStream" reference="../../../../../.."/>
+                  <defaultConverter class="com.thoughtworks.xstream.converters.reflection.ReflectionConverter">
+                    <reflectionProvider class="com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider" reference="../../../../../../../reflectionProvider"/>
+                    <mapper class="com.thoughtworks.xstream.mapper.CachingMapper">
+                      <wrapped class="com.thoughtworks.xstream.mapper.AnnotationMapper">
+                        <wrapped class="com.thoughtworks.xstream.mapper.ImmutableTypesMapper">
+                          <wrapped class="com.thoughtworks.xstream.mapper.LocalConversionMapper">
+                            <wrapped class="com.thoughtworks.xstream.mapper.EnumMapper">
+                              <wrapped class="com.thoughtworks.xstream.mapper.AttributeMapper">
+                                <wrapped class="com.thoughtworks.xstream.mapper.DefaultImplementationsMapper">
+                                  <wrapped class="com.thoughtworks.xstream.mapper.ArrayMapper">
+                                    <wrapped class="com.thoughtworks.xstream.mapper.OuterClassMapper">
+                                      <wrapped class="com.thoughtworks.xstream.mapper.ImplicitCollectionMapper">
+                                        <wrapped class="com.thoughtworks.xstream.mapper.SystemAttributeAliasingMapper">
+                                          <wrapped class="com.thoughtworks.xstream.mapper.AttributeAliasingMapper">
+                                            <wrapped class="com.thoughtworks.xstream.mapper.FieldAliasingMapper">
+                                              <wrapped class="com.thoughtworks.xstream.mapper.ClassAliasingMapper">
+                                                <wrapped class="com.thoughtworks.xstream.mapper.PackageAliasingMapper" serialization="custom">
+                                                  <unserializable-parents>
+                                                    <wrapped class="com.thoughtworks.xstream.mapper.DynamicProxyMapper">
+                                                      <wrapped class="com.thoughtworks.xstream.mapper.DefaultMapper">
+                                                        <classLoader class="com.thoughtworks.xstream.core.util.ClassLoaderReference" reference="../../../../../../../../../../../../../../../../../../../../../../../../../classLoaderReference"/>
+                                                      </wrapped>
+                                                      <alias>dynamic-proxy</alias>
+                                                    </wrapped>
+                                                  </unserializable-parents>
+                                                  <com.thoughtworks.xstream.mapper.PackageAliasingMapper>
+                                                    <map/>
+                                                  </com.thoughtworks.xstream.mapper.PackageAliasingMapper>
+                                                </wrapped>
+                                                <typeToName>
+                                                  <entry>
+                                                    <java-class>java.nio.charset.Charset</java-class>
+                                                    <string>charset</string>
+                                                  </entry>
+                                                </typeToName>
+                                                <classToName>
+                                                  <entry>
+                                                    <string>java.lang.StackTraceElement</string>
+                                                    <string>trace</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Boolean</string>
+                                                    <string>boolean</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Long</string>
+                                                    <string>long</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.sql.Timestamp</string>
+                                                    <string>sql-timestamp</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Float</string>
+                                                    <string>float</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>mingleplugin.MingleCard</string>
+                                                    <string>card</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>mingleplugin.MingleCardProperty</string>
+                                                    <string>property</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.BitSet</string>
+                                                    <string>bit-set</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>mingleplugin.MingleProject</string>
+                                                    <string>project</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.math.BigInteger</string>
+                                                    <string>big-int</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Double</string>
+                                                    <string>double</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.EnumSet</string>
+                                                    <string>enum-set</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Vector</string>
+                                                    <string>vector</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Locale</string>
+                                                    <string>locale</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Class</string>
+                                                    <string>java-class</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.sql.Time</string>
+                                                    <string>sql-time</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.LinkedList</string>
+                                                    <string>linked-list</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Map$Entry</string>
+                                                    <string>entry</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Object</string>
+                                                    <string>object</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.List</string>
+                                                    <string>list</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Integer</string>
+                                                    <string>int</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.TreeMap</string>
+                                                    <string>tree-map</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Short</string>
+                                                    <string>short</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.awt.Font</string>
+                                                    <string>awt-font</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Number</string>
+                                                    <string>number</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.LinkedHashMap</string>
+                                                    <string>linked-hash-map</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.sql.Date</string>
+                                                    <string>sql-date</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>com.thoughtworks.xstream.mapper.Mapper$Null</string>
+                                                    <string>null</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.io.File</string>
+                                                    <string>file</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Byte</string>
+                                                    <string>byte</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.UUID</string>
+                                                    <string>uuid</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Currency</string>
+                                                    <string>currency</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Properties</string>
+                                                    <string>properties</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.reflect.Constructor</string>
+                                                    <string>constructor</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Calendar</string>
+                                                    <string>gregorian-calendar</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Map</string>
+                                                    <string>map</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.awt.Color</string>
+                                                    <string>awt-color</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.reflect.Method</string>
+                                                    <string>method</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.awt.font.TextAttribute</string>
+                                                    <string>awt-text-attribute</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.StringBuilder</string>
+                                                    <string>string-builder</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>mingleplugin.MingleUser</string>
+                                                    <string>user</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.TreeSet</string>
+                                                    <string>tree-set</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.EnumMap</string>
+                                                    <string>enum-map</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>javax.security.auth.Subject</string>
+                                                    <string>auth-subject</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.Character</string>
+                                                    <string>char</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Set</string>
+                                                    <string>set</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.StringBuffer</string>
+                                                    <string>string-buffer</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Hashtable</string>
+                                                    <string>hashtable</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.lang.String</string>
+                                                    <string>string</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.Date</string>
+                                                    <string>date</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>javax.xml.datatype.Duration</string>
+                                                    <string>duration</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.net.URL</string>
+                                                    <string>url</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.math.BigDecimal</string>
+                                                    <string>big-decimal</string>
+                                                  </entry>
+                                                  <entry>
+                                                    <string>java.util.LinkedHashSet</string>
+                                                    <string>linked-hash-set</string>
+                                                  </entry>
+                                                </classToName>
+                                              </wrapped>
+                                              <fieldToAliasMap/>
+                                              <aliasToFieldMap/>
+                                              <fieldsToOmit/>
+                                            </wrapped>
+                                            <aliasToName/>
+                                          </wrapped>
+                                          <aliasToName/>
+                                        </wrapped>
+                                        <classNameToMapper/>
+                                      </wrapped>
+                                      <alias>outer-class</alias>
+                                    </wrapped>
+                                  </wrapped>
+                                  <typeToImpl>
+                                    <entry>
+                                      <java-class>java.util.Map</java-class>
+                                      <java-class>java.util.HashMap</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>java.util.Set</java-class>
+                                      <java-class>java.util.HashSet</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>java.util.List</java-class>
+                                      <java-class>java.util.ArrayList</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>int</java-class>
+                                      <java-class>java.lang.Integer</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>float</java-class>
+                                      <java-class>java.lang.Float</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>java.util.Calendar</java-class>
+                                      <java-class>java.util.GregorianCalendar</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>com.thoughtworks.xstream.mapper.Mapper$Null</java-class>
+                                      <null/>
+                                    </entry>
+                                    <entry>
+                                      <java-class>byte</java-class>
+                                      <java-class>java.lang.Byte</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>double</java-class>
+                                      <java-class>java.lang.Double</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>char</java-class>
+                                      <java-class>java.lang.Character</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>long</java-class>
+                                      <java-class>java.lang.Long</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>boolean</java-class>
+                                      <java-class>java.lang.Boolean</java-class>
+                                    </entry>
+                                    <entry>
+                                      <java-class>short</java-class>
+                                      <java-class>java.lang.Short</java-class>
+                                    </entry>
+                                  </typeToImpl>
+                                </wrapped>
+                                <fieldNameToTypeMap/>
+                                <typeSet/>
+                                <converterLookup class="com.thoughtworks.xstream.core.DefaultConverterLookup" reference="../../../../../../../../../../../.."/>
+                                <fieldToUseAsAttribute/>
+                              </wrapped>
+                            </wrapped>
+                            <localConverters/>
+                          </wrapped>
+                          <immutableTypes>
+                            <java-class>java.lang.Character</java-class>
+                            <java-class>java.lang.Class</java-class>
+                            <java-class>java.io.File</java-class>
+                            <java-class>java.net.URL</java-class>
+                            <java-class>int</java-class>
+                            <java-class>com.thoughtworks.xstream.mapper.Mapper$Null</java-class>
+                            <java-class>byte</java-class>
+                            <java-class>double</java-class>
+                            <java-class>long</java-class>
+                            <java-class>boolean</java-class>
+                            <java-class>short</java-class>
+                            <java-class>java.lang.Short</java-class>
+                            <java-class>java.lang.String</java-class>
+                            <java-class>java.lang.Byte</java-class>
+                            <java-class>java.math.BigInteger</java-class>
+                            <java-class>com.thoughtworks.xstream.converters.extended.CharsetConverter</java-class>
+                            <java-class>java.awt.font.TextAttribute</java-class>
+                            <java-class>java.lang.Boolean</java-class>
+                            <java-class>float</java-class>
+                            <java-class>java.lang.Long</java-class>
+                            <java-class>java.math.BigDecimal</java-class>
+                            <java-class>java.lang.Float</java-class>
+                            <java-class>char</java-class>
+                            <java-class>java.lang.Double</java-class>
+                            <java-class>java.lang.Integer</java-class>
+                          </immutableTypes>
+                        </wrapped>
+                        <locked>true</locked>
+                        <arguments>
+                          <com.thoughtworks.xstream.mapper.AnnotationMapper reference="../.."/>
+                          <com.thoughtworks.xstream.core.util.ClassLoaderReference reference="../../../../../../../../../../classLoaderReference"/>
+                          <com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider reference="../../../../../../../../../../reflectionProvider"/>
+                          <com.thoughtworks.xstream.core.JVM>
+                            <reflectionProvider class="com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider" reference="../../../../../../../../../../../reflectionProvider"/>
+                            <supportsAWT>true</supportsAWT>
+                            <supportsSwing>true</supportsSwing>
+                            <supportsSQL>true</supportsSQL>
+                          </com.thoughtworks.xstream.core.JVM>
+                        </arguments>
+                        <converterRegistry class="com.thoughtworks.xstream.core.DefaultConverterLookup" reference="../../../../../../../.."/>
+                        <classAliasingMapper reference="../wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+                        <defaultImplementationsMapper reference="../wrapped/wrapped/wrapped/wrapped/wrapped"/>
+                        <implicitCollectionMapper reference="../wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+                        <fieldAliasingMapper reference="../wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+                        <attributeMapper reference="../wrapped/wrapped/wrapped/wrapped"/>
+                        <localConversionMapper reference="../wrapped/wrapped"/>
+                        <converterCache/>
+                        <annotatedTypes class="com.thoughtworks.xstream.mapper.AnnotationMapper$WeakHashSet">
+                          <map serialization="custom">
+                            <unserializable-parents/>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                              <default>
+                                <segmentMask>15</segmentMask>
+                                <segmentShift>28</segmentShift>
+                                <segments>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                </segments>
+                              </default>
+                              <java-class>java.lang.Object</java-class>
+                              <object/>
+                              <null/>
+                              <null/>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                          </map>
+                        </annotatedTypes>
+                        <processedTypes class="com.thoughtworks.xstream.mapper.AnnotationMapper$WeakHashSet">
+                          <map serialization="custom">
+                            <unserializable-parents/>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                              <default>
+                                <segmentMask>15</segmentMask>
+                                <segmentShift>28</segmentShift>
+                                <segments>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                    <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                      <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                        <default>
+                                          <state>0</state>
+                                        </default>
+                                      </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                        <default/>
+                                      </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                    </sync>
+                                    <loadFactor>0.75</loadFactor>
+                                  </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                </segments>
+                              </default>
+                              <null/>
+                              <null/>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                          </map>
+                        </processedTypes>
+                        <serializedClass class="com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap" serialization="custom">
+                          <unserializable-parents/>
+                          <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                            <default>
+                              <segmentMask>15</segmentMask>
+                              <segmentShift>28</segmentShift>
+                              <segments>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                                  <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                    <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                      <default>
+                                        <state>0</state>
+                                      </default>
+                                    </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                    <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                      <default/>
+                                    </java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  </sync>
+                                  <loadFactor>0.75</loadFactor>
+                                </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              </segments>
+                            </default>
+                            <null/>
+                            <null/>
+                          </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                        </serializedClass>
+                      </wrapped>
+                    </mapper>
+                  </defaultConverter>
+                </value>
+                <priority>0</priority>
+                <id>53</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.UUIDConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>52</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.StringBuilderConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>51</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.enums.EnumMapConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>50</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.enums.EnumSetConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>49</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.enums.EnumConverter"/>
+                <priority>0</priority>
+                <id>48</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.DurationConverter">
+                    <factory class="com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl"/>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>47</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.CharsetConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>46</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.RegexPatternConverter">
+                  <defaultConverter class="com.thoughtworks.xstream.converters.reflection.ReflectionConverter" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>45</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.CurrencyConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>44</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.StackTraceElementConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>43</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.ThrowableConverter">
+                  <defaultConverter class="com.thoughtworks.xstream.converters.reflection.ReflectionConverter" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>42</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.SubjectConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>41</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.GregorianCalendarConverter"/>
+                <priority>0</priority>
+                <id>40</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.LocaleConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>39</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.LookAndFeelConverter">
+                  <reflectionProvider class="com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider" reference="../../../../../../reflectionProvider"/>
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>38</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.TextAttributeConverter">
+                    <type>java.awt.font.TextAttribute</type>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>37</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.ColorConverter"/>
+                <priority>0</priority>
+                <id>36</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.FontConverter"/>
+                <priority>0</priority>
+                <id>35</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.JavaMethodConverter">
+                  <javaClassConverter class="com.thoughtworks.xstream.converters.extended.JavaClassConverter">
+                    <classLoader class="com.thoughtworks.xstream.core.util.ClassLoaderReference" reference="../../../../../../../classLoaderReference"/>
+                  </javaClassConverter>
+                </value>
+                <priority>0</priority>
+                <id>34</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.JavaClassConverter">
+                    <classLoader class="com.thoughtworks.xstream.core.util.ClassLoaderReference" reference="../../../../../../../classLoaderReference"/>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>33</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.DynamicProxyConverter">
+                  <classLoader class="com.thoughtworks.xstream.core.util.ClassLoaderReference" reference="../../../../../../classLoaderReference"/>
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>32</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.SqlDateConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>31</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.SqlTimeConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>30</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.SqlTimestampConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>29</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.extended.FileConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>28</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.extended.EncodedByteArrayConverter"/>
+                <priority>0</priority>
+                <id>27</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.PropertiesConverter">
+                  <sort>false</sort>
+                </value>
+                <priority>0</priority>
+                <id>26</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.TreeSetConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>25</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.TreeMapConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>24</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.MapConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>23</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.CollectionConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>22</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.CharArrayConverter"/>
+                <priority>0</priority>
+                <id>21</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.ArrayConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>0</priority>
+                <id>20</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.BigDecimalConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>19</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.BigIntegerConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>18</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.URLConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>17</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.collections.BitSetConverter"/>
+                <priority>0</priority>
+                <id>16</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.DateConverter">
+                    <defaultFormat>
+                      <formatString>yyyy-MM-dd HH:mm:ss.S z</formatString>
+                      <pool>
+                        <initialPoolSize>4</initialPoolSize>
+                        <maxPoolSize>20</maxPoolSize>
+                        <factory class="com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat$1">
+                          <val_-lenient>false</val_-lenient>
+                          <outer-class reference="../../.."/>
+                        </factory>
+                      </pool>
+                    </defaultFormat>
+                    <acceptableFormats>
+                      <com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                        <formatString>yyyy-MM-dd HH:mm:ss.S a</formatString>
+                        <pool>
+                          <initialPoolSize>1</initialPoolSize>
+                          <maxPoolSize>20</maxPoolSize>
+                          <factory class="com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat$1">
+                            <val_-lenient>false</val_-lenient>
+                            <outer-class reference="../../.."/>
+                          </factory>
+                        </pool>
+                      </com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                      <com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                        <formatString>yyyy-MM-dd HH:mm:ssz</formatString>
+                        <pool>
+                          <initialPoolSize>1</initialPoolSize>
+                          <maxPoolSize>20</maxPoolSize>
+                          <factory class="com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat$1">
+                            <val_-lenient>false</val_-lenient>
+                            <outer-class reference="../../.."/>
+                          </factory>
+                        </pool>
+                      </com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                      <com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                        <formatString>yyyy-MM-dd HH:mm:ss z</formatString>
+                        <pool>
+                          <initialPoolSize>1</initialPoolSize>
+                          <maxPoolSize>20</maxPoolSize>
+                          <factory class="com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat$1">
+                            <val_-lenient>false</val_-lenient>
+                            <outer-class reference="../../.."/>
+                          </factory>
+                        </pool>
+                      </com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                      <com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                        <formatString>yyyy-MM-dd HH:mm:ssa</formatString>
+                        <pool>
+                          <initialPoolSize>1</initialPoolSize>
+                          <maxPoolSize>20</maxPoolSize>
+                          <factory class="com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat$1">
+                            <val_-lenient>false</val_-lenient>
+                            <outer-class reference="../../.."/>
+                          </factory>
+                        </pool>
+                      </com.thoughtworks.xstream.core.util.ThreadSafeSimpleDateFormat>
+                    </acceptableFormats>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>15</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.StringBufferConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>14</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.StringConverter">
+                    <cache class="com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap" serialization="custom">
+                      <unserializable-parents/>
+                      <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                        <default>
+                          <segmentMask>15</segmentMask>
+                          <segmentShift>28</segmentShift>
+                          <segments>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                            <com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                              <sync class="java.util.concurrent.locks.ReentrantLock$NonfairSync" serialization="custom">
+                                <java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                  <default>
+                                    <state>0</state>
+                                  </default>
+                                </java.util.concurrent.locks.AbstractQueuedSynchronizer>
+                                <java.util.concurrent.locks.ReentrantLock_-Sync>
+                                  <default/>
+                                </java.util.concurrent.locks.ReentrantLock_-Sync>
+                              </sync>
+                              <loadFactor>0.75</loadFactor>
+                            </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap_-Segment>
+                          </segments>
+                        </default>
+                        <null/>
+                        <null/>
+                      </com.thoughtworks.xstream.core.util.ConcurrentWeakHashMap>
+                    </cache>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>13</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.ByteConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>12</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.BooleanConverter">
+                    <positive>true</positive>
+                    <negative>false</negative>
+                    <caseSensitive>false</caseSensitive>
+                  </wrapped>
+                </value>
+                <priority>0</priority>
+                <id>11</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.basic.CharConverter"/>
+                <priority>0</priority>
+                <id>10</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.ShortConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>9</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.LongConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>8</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.DoubleConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>7</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.FloatConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>6</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.SingleValueConverterWrapper">
+                  <wrapped class="com.thoughtworks.xstream.converters.basic.IntConverter"/>
+                </value>
+                <priority>0</priority>
+                <id>5</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.reflection.ExternalizableConverter">
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>-10</priority>
+                <id>3</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.reflection.SerializableConverter">
+                  <reflectionProvider class="com.thoughtworks.xstream.converters.reflection.SerializableConverter$UnserializableParentsReflectionProvider">
+                    <wrapped class="com.thoughtworks.xstream.converters.reflection.Sun14ReflectionProvider" reference="../../../../../../../reflectionProvider"/>
+                  </reflectionProvider>
+                  <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+                </value>
+                <priority>-10</priority>
+                <id>2</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+              <com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+                <value class="com.thoughtworks.xstream.converters.reflection.ReflectionConverter" reference="../../com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter"/>
+                <priority>-20</priority>
+                <id>1</id>
+              </com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem>
+            </set>
+            <lowestPriority>-20</lowestPriority>
+            <lastId>53</lastId>
+          </converters>
+        </converterLookup>
+        <converterRegistry class="com.thoughtworks.xstream.core.DefaultConverterLookup" reference="../converterLookup"/>
+        <mapper class="com.thoughtworks.xstream.mapper.CachingMapper" reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper"/>
+        <packageAliasingMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <classAliasingMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <fieldAliasingMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <attributeAliasingMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <systemAttributeAliasingMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <attributeMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <defaultImplementationsMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <immutableTypesMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped"/>
+        <implicitCollectionMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped/wrapped"/>
+        <localConversionMapper reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped/wrapped/wrapped"/>
+        <annotationConfiguration class="com.thoughtworks.xstream.mapper.AnnotationMapper" reference="../converterLookup/converters/set/com.thoughtworks.xstream.core.util.PrioritizedList_-PrioritizedItem[2]/value/defaultConverter/mapper/wrapped"/>
+      </xstream>
+    </mingleplugin.MingleRestService>
+  </sites>
+</mingleplugin.MingleProjectProperty_-DescriptorImpl>

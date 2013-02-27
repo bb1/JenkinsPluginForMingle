@@ -110,7 +110,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.alias("user", MingleUser.class);
 
     if(!url.toExternalForm().endsWith("/")) {
-      try {
+      try { 
         url = new URL(url.toExternalForm()+"/");
       } catch (MalformedURLException e) {
         throw new AssertionError(e); // impossible
