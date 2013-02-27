@@ -25,9 +25,6 @@ public class MingleBuildAction implements Action {
 
     public MingleCard[] cards;
 
-    //TODO: connection service <-> Build? here or somewhere else? and when will it be initialized?
-    public MingleRestService service;
-
     private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
 
     public MingleBuildAction(AbstractBuild<?, ?> owner, Collection<MingleCard> cards) {
@@ -35,20 +32,6 @@ public class MingleBuildAction implements Action {
         this.owner = owner;
         this.cards = cards.toArray(new MingleCard[cards.size()]);
         Arrays.sort(this.cards);
-
-        /*/ should be changable, savable via DESCRIPTOR etc.
-        URL url;
-        try {
-            url = new URL("http://mingle/");
-        } catch (MalformedURLException e) {
-            //do nothing
-        }
-        String userName = "birk";
-        String password = "Wae6ohl8";
-        String project = "scrum__with_two_teams_";
-        String userPattern = "";
-        boolean supportsWikiStyleComment = false;
-        this.service = new MingleRestService(url, userName, password, project, userPattern, supportsWikiStyleComment);*/
     }
 
     public String getIconFileName() {
