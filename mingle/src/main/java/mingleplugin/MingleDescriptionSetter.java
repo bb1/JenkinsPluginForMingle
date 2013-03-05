@@ -14,30 +14,48 @@ import hudson.tasks.Recorder;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
 
 public class MingleDescriptionSetter extends Recorder {
 
   @Override
   public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
   BuildListener listener) throws InterruptedException {
-  	MingleRestService service = MingleRestService.get(build);
+    AbstractProject<?,?> project = build.getProject();
+    MingleRestService service = MingleRestService.get(project);
 
-  	//TODO: get Actions? How many Actions are performed? In which step the changelog is processed?
-    //TODO: getProjectAction(build) doesnt work even if it shoudl arcording to the jenkins documentation
-  	MingleBuildAction action = (MingleBuildAction) getProjectAction(build);
-  	List<Integer> cardIds = action.getCardIds();
-    Iterator<Integer> myListIterator = cardIds.iterator(); 
-    String newDescription = "OLD DESCRIPTION HERE?<br/>\n\n";
+    //TODO: getProjectActions() -> Returns action objects if THIS BUILDSTEP has actions to contribute to a Project. :/
+    MingleBuildAction action = (MingleBuildAction) getProjectActions(project);
+    List<Integer> cardIds = action.getCardIds();
+    Iterator<Integer> myListIterator = cardIds.iterator();
+    String newDescription = "";
 
     while (myListIterator.hasNext()) {
       int id = (int) myListIterator.next();
-      //add formation here to string
-      newDescription += service.getCardUrl(id)+"<br/>\\n\\n";
+      URL cardurl;
+      try {
+        cardurl = service.getCardUrl(id);
+      } catch (MalformedURLException e) {
+        listener.getLogger().println("Couldn't get URL for Card " + id);
+        // skip the rest
+        continue;
+      }
+      //TODO: Card headline here
+      newDescription += "<a href=\""+cardurl.toString()+"\">#"+id+"</a><br/>\\n"; 
     }
     // 	result = build.getEnvironment(listener).expand(result);.
     listener.getLogger().println("Description set: " + newDescription);
-    build.setDescription(newDescription);
-    //
+    try {
+      build.setDescription(newDescription);
+    } catch (IOException e) {
+      listener.getLogger().println("Couldn't set the build description!");
+    }
+
+    //if anything goes wrong throw new AbortException()
+
+    return true;
   }
 
   public BuildStepMonitor getRequiredMonitorService() {
