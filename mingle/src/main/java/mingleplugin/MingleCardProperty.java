@@ -14,7 +14,7 @@ class MingleCardProperty extends MingleObject{
 
   private String name;
   private Object value;
-  //private String type_description;
+  private String type_description;
   private boolean hidden;
 
   public String getName()
@@ -78,7 +78,6 @@ class MingleCardProperty extends MingleObject{
   MingleCardProperty(String name, Object value) {
     this.name = name;
     this.value = value;
-    this.hidden = null;
   }
 
 }
