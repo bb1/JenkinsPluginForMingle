@@ -19,10 +19,13 @@ import java.net.MalformedURLException;
 import java.io.IOException;
 
 public class MingleDescriptionSetter extends Recorder {
+  private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
 
   @Override
   public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
   BuildListener listener) throws InterruptedException {
+    LOGGER.info("Started MingleDescriptionSetter");
+
     AbstractProject<?,?> project = build.getProject();
     MingleRestService service = MingleRestService.get(project);
 
@@ -71,7 +74,7 @@ public class MingleDescriptionSetter extends Recorder {
 
     @Override
     public String getDisplayName() {
-      return Messages.DescriptionSetter_DisplayName();
+      return "MingleDescriptionSetter";
     }
 
     @Override

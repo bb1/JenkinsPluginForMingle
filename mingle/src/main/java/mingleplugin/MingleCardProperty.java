@@ -14,7 +14,7 @@ class MingleCardProperty extends MingleObject{
 
   private String name;
   private Object value;
-  private String type_description;
+  //private String type_description;
   private boolean hidden;
 
   public String getName()
@@ -32,6 +32,9 @@ class MingleCardProperty extends MingleObject{
   }
 
   public void setValue( Object obj ) {
+    this.value = obj;
+  }
+/*
     // checks for valid data types. incomplete!
     // TODO: complete checks
     if (obj instanceof String || obj instanceof String || 
@@ -50,6 +53,7 @@ class MingleCardProperty extends MingleObject{
   {
     this.type_description = description;
   }
+*/
 
  public boolean getHidden()
   {

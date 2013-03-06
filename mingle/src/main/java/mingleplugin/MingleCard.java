@@ -12,7 +12,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
   public String name;
   public String description;
-  public String cardtype;
+  public String card_type;
   
   public MingleProject project;
   public MingleCardProperty[] properties;
@@ -37,10 +37,10 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   }
 
   String getCardtype() {
-    return cardtype;
+    return card_type;
   }
   void setCardtype(String arg) {
-    this.cardtype = arg;
+    this.card_type = arg;
   }
 
   String getDescription() {
@@ -103,7 +103,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     this.created_by = created_by;
     this.name = name;
     this.description = description;
-    this.cardtype = cardtype;
+    this.card_type = cardtype;
     this.project = project;
     this.properties = properties;
     this.tags = tags;

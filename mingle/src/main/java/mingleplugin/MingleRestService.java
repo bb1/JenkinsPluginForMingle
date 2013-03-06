@@ -86,8 +86,21 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
    */
   public final boolean supportsWikiStyleComment;
 
-  // XStream set up:
-  XStream xstream = new XStream(new StaxDriver());
+  // set up XStream to ignore fields that it don't know
+  XStream xstream = new XStream(new StaxDriver()) {
+    @Override
+    protected MapperWrapper wrapMapper(MapperWrapper next) {
+      return new MapperWrapper(next) {
+        @Override
+        public boolean shouldSerializeMember(Class definedIn, String fieldName) {
+          if (definedIn == Object.class) {
+            return false;
+          }
+          return super.shouldSerializeMember(definedIn, fieldName);
+        }
+      };
+    }
+  };
 
   /**
    * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
