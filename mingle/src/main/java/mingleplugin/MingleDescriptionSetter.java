@@ -30,7 +30,7 @@ public class MingleDescriptionSetter extends Recorder {
     MingleBuildAction action = (MingleBuildAction) getProjectActions(project);
     List<Integer> cardIds = action.getCardIds();
     Iterator<Integer> myListIterator = cardIds.iterator();
-    String newDescription = "_TEST__";
+    String newDescription = "__TEST__:</br>\n";
 
     while (myListIterator.hasNext()) {
       int id = (int) myListIterator.next();
@@ -60,6 +60,30 @@ public class MingleDescriptionSetter extends Recorder {
 
   public BuildStepMonitor getRequiredMonitorService() {
     return BuildStepMonitor.NONE;
+  }
+
+  @Extension
+  public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
+
+    public DescriptorImpl() {
+      super(MingleDescriptionSetter.class);
+    }
+
+    @Override
+    public String getDisplayName() {
+      return Messages.DescriptionSetter_DisplayName();
+    }
+
+    @Override
+    public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+      return true;
+    }
+
+  }
+
+  @Override
+  public DescriptorImpl getDescriptor() {
+    return (DescriptorImpl) super.getDescriptor();
   }
 
 }
