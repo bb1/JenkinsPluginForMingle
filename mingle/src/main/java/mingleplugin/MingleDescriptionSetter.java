@@ -30,7 +30,7 @@ public class MingleDescriptionSetter extends Recorder {
     MingleBuildAction action = (MingleBuildAction) getProjectActions(project);
     List<Integer> cardIds = action.getCardIds();
     Iterator<Integer> myListIterator = cardIds.iterator();
-    String newDescription = "";
+    String newDescription = "_TEST__";
 
     while (myListIterator.hasNext()) {
       int id = (int) myListIterator.next();

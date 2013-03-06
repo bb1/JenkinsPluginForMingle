@@ -101,6 +101,7 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
     } else {
       MingleBuildAction action = new MingleBuildAction(build, cardToBeSaved);
       build.addAction(action);
+      //TODO: maybe save cards in the service (what equals the session in jira)
     }
     
     try {
