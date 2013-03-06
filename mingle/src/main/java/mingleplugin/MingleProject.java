@@ -63,4 +63,18 @@ class MingleProject extends MingleObject{
     this.date_format = date_format;
   }
 
+  // If created from a MingleCard
+  MingleProject(String name, String identifier) {
+    this.name = name;
+    this.identifier = identifier;
+    this.description = null;
+    this.keywords = null;
+    this.template = null;
+    this.created_at = null;
+    this.updated_at = null;
+    this.created_by = null;
+    this.modified_by = null;
+    this.date_format = null;
+  }
+
 }

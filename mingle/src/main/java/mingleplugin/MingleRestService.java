@@ -87,7 +87,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public final boolean supportsWikiStyleComment;
 
   // set up XStream to ignore fields that it don't know
-  XStream xstream = new XStream(new StaxDriver()) {
+  XStream xstream = new XStream(new StaxDriver());/* {
     @Override
     protected MapperWrapper wrapMapper(MapperWrapper next) {
       return new MapperWrapper(next) {
@@ -100,7 +100,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
         }
       };
     }
-  };
+  };*/
 
   /**
    * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
@@ -120,7 +120,14 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.alias("card", MingleCard.class);
     xstream.alias("property", MingleCardProperty.class);
     xstream.alias("project", MingleProject.class);
+    xstream.alias("created_by", MingleUser.class);
+    xstream.alias("modified_by", MingleUser.class);
+      xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
+      // ...
     xstream.alias("user", MingleUser.class);
+      xstream.addImplicitArray(MingleUser.class, "properties", MingleCardProperty.class);
+      xstream.omitField(MingleUser.class, "version");
+      // card_type.name = card_type; -.-
 
     if(!url.toExternalForm().endsWith("/")) {
       try { 

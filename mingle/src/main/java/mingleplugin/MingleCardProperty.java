@@ -32,9 +32,6 @@ class MingleCardProperty extends MingleObject{
   }
 
   public void setValue( Object obj ) {
-    this.value = obj;
-  }
-/*
     // checks for valid data types. incomplete!
     // TODO: complete checks
     if (obj instanceof String || obj instanceof String || 
@@ -53,7 +50,6 @@ class MingleCardProperty extends MingleObject{
   {
     this.type_description = description;
   }
-*/
 
  public boolean getHidden()
   {
@@ -82,7 +78,7 @@ class MingleCardProperty extends MingleObject{
   MingleCardProperty(String name, Object value) {
     this.name = name;
     this.value = value;
-    this.hidden = hidden;
+    this.hidden = null;
   }
 
 }
