@@ -19,12 +19,12 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   public String tags; // comma-delimited list of tags
   public URL rendered_description; // Resource; Link to rendered card description as HTML.
   // read only, must be set inside the constructor and can't be changed:
-  public final int id;
-  public final int number;
-  public final int version;
-  public final Date created_on;
-  public final Date modified_on;
-  public final MingleUser created_by;
+  public int id;
+  public int number;
+  public int version;
+  public Date created_on;
+  public Date modified_on;
+  public MingleUser created_by;
 
   // getter and setter:
   public String getName()
