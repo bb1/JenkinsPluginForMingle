@@ -1,5 +1,13 @@
 package mingleplugin;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.net.URL;
+import java.net.MalformedURLException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.Util;
@@ -11,12 +19,8 @@ import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.io.IOException;
+import hudson.scm.ChangeLogAnnotator;
+import hudson.scm.ChangeLogSet.Entry;
 
 public class MingleDescriptionSetter extends Recorder {
   private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
