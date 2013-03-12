@@ -131,7 +131,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       xstream.omitField(MingleUser.class, "card_type");
       xstream.omitField(MingleUser.class, "project");
       xstream.omitField(MingleUser.class, "modified_by");
-      xstream.omitField(MingleUser.class, "created_by");
+      //xstream.omitField(MingleUser.class, "created_by");
       // card_type.name = card_type; -.-
 
     if(!url.toExternalForm().endsWith("/")) {
