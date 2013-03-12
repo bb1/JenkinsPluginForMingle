@@ -120,10 +120,10 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.alias("card", MingleCard.class);
     xstream.alias("property", MingleCardProperty.class);
     xstream.alias("project", MingleProject.class);
-    xstream.alias("created_by", MingleUser.class);
-    xstream.alias("modified_by", MingleUser.class);
-      xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
-      // ...
+      //xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
+    //xstream.alias("created_by", MingleUser.class);
+    //xstream.alias("modified_by", MingleUser.class);
+    // ...
     xstream.alias("user", MingleUser.class);
       //xstream.addImplicitArray(MingleUser.class, "properties", MingleCardProperty.class);
       xstream.omitField(MingleUser.class, "version");
@@ -131,7 +131,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       xstream.omitField(MingleUser.class, "card_type");
       xstream.omitField(MingleUser.class, "project");
       xstream.omitField(MingleUser.class, "modified_by");
-      //xstream.omitField(MingleUser.class, "created_by");
+      xstream.omitField(MingleUser.class, "created_by");
       // card_type.name = card_type; -.-
 
     if(!url.toExternalForm().endsWith("/")) {

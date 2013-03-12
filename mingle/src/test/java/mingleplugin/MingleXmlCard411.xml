@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<card>
+  <name>Higher auth token expiration for message-attached pictures</name>
+  <description>h2. Narrative
+
+As an app developer I want to store the best auth token for any picture because this'll ensure that I can request the longest-valid new auth token once the concept is fully implemented.
+
+
+h2. Acceptance Criteria
+
+* It is required return a &lt;code&gt;token_expiration&lt;/code&gt; 10 seconds after unix timestamp 0 in the picture objects returned by &lt;code&gt;messages/search&lt;/code&gt; and &lt;code&gt;messages/get&lt;/code&gt; (so, the message attachments).
+
+
+h2. Constraints
+
+* Could be a dirty hack in &lt;code&gt;ApiPictureMediaHelper&lt;/code&gt; where the expiration constant is set to 10 instead of 0 if the permission is based on message attachment.
+
+
+h2. Related Stories
+
+* #0
+
+
+h2. Defects
+
+{{table query: SELECT Number, Name, Owner, 'Defect Status' WHERE Type = Bug and Story = THIS CARD}}
+
+
+h2. Notes, Dokumentation, Tasks
+
+h3. Adjust ApiPictureMediaHelper (1 TU)
+
+* add new expiration constant
+* getAuthTokenFromPicId should use this if accessorType is a message
+* adjust/add unit tests
+
+h3. Adjust/Add cUrl Tests (1 TU)
+
+{% dashboard-panel %}
+ {% panel-heading %}
+
+   &#8230;
+ 
+{% panel-heading %}
+ {% panel-content %}
+
+* &#8230;
+* &#8230;
+
+ {% panel-content %}
+{% dashboard-panel %}</description>
+  <card_type url="http://mingle/api/v2/projects/scrum__with_two_teams_/card_types/318.xml">
+    <name>Story</name>
+  </card_type>
+  <id type="integer">5787</id>
+  <number type="integer">411</number>
+  <project url="http://mingle/api/v2/projects/scrum__with_two_teams_.xml">
+    <name>Scrum (with two teams)</name>
+    <identifier>scrum__with_two_teams_</identifier>
+  </project>
+  <version type="integer">1</version>
+  <project_card_rank type="integer">53</project_card_rank>
+  <created_on type="datetime">2012-07-19T07:47:14Z</created_on>
+  <modified_on type="datetime">2012-07-19T07:47:14Z</modified_on>
+  <modified_by url="http://mingle/api/v2/users/2.xml">
+    <name>Stefan Hoeppner</name>
+    <login>hoeppner</login>
+  </modified_by>
+  <created_by url="http://mingle/api/v2/users/2.xml">
+    <name>Stefan Hoeppner</name>
+    <login>hoeppner</login>
+  </created_by>
+  <properties type="array">
+    <property type_description="Managed text list" hidden="false">
+      <name>Status</name>
+      <value>Accepted</value>
+    </property>
+    <property type_description="Automatically generated from the team list" hidden="false">
+      <name>Owner</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Managed number list" hidden="false">
+      <name>Story Points</name>
+      <value>1</value>
+    </property>
+    <property type_description="Card" hidden="false">
+      <name>Depend on</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Created</name>
+      <value type="date">2012-06-07</value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Status Open</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Ready</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Development Started</name>
+      <value type="date">2012-06-25</value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Development Ended</name>
+      <value type="date">2012-06-25</value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Accepted</name>
+      <value type="date">2012-06-25</value>
+    </property>
+    <property type_description="Card" hidden="true">
+      <name>Sprint Added to scope</name>
+      <value url="http://mingle/api/v2/projects/scrum__with_two_teams_/cards/371.xml">
+        <number type="integer">371</number>
+      </value>
+    </property>
+    <property type_description="Card" hidden="true">
+      <name>Sprint Development started</name>
+      <value url="http://mingle/api/v2/projects/scrum__with_two_teams_/cards/371.xml">
+        <number type="integer">371</number>
+      </value>
+    </property>
+    <property type_description="Card" hidden="true">
+      <name>Sprint Accepted</name>
+      <value url="http://mingle/api/v2/projects/scrum__with_two_teams_/cards/371.xml">
+        <number type="integer">371</number>
+      </value>
+    </property>
+    <property type_description="Managed text list" hidden="false">
+      <name>P</name>
+      <value>[API]</value>
+    </property>
+    <property type_description="Managed text list" hidden="false">
+      <name>Funktionsbereich</name>
+      <value>Pictures</value>
+    </property>
+    <property type_description="Managed text list" hidden="false">
+      <name>Stakeholder</name>
+      <value>Product</value>
+    </property>
+    <property type_description="Date" hidden="false">
+      <name>Date Deployment</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Any card used in tree" hidden="false">
+      <name>Epic Story</name>
+      <value nil="true"></value>
+    </property>
+    <property type_description="Any card used in tree" hidden="false">
+      <name>Sprint</name>
+      <value url="http://mingle/api/v2/projects/scrum__with_two_teams_/cards/371.xml">
+        <number type="integer">371</number>
+      </value>
+    </property>
+    <property type_description="Any card used in tree" hidden="false">
+      <name>Feature</name>
+      <value nil="true"></value>
+    </property>
+  </properties>
+  <tags>API v3 (App 2.0 Launch)</tags>
+  <rendered_description url="http://mingle/api/v2/projects/scrum__with_two_teams_/render?content_provider%5Bid%5D=5787&amp;content_provider%5Btype%5D=card">
+  </rendered_description>
+</card>
