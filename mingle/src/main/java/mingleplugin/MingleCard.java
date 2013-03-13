@@ -25,6 +25,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   public Date created_on;
   public Date modified_on;
   public MingleUser created_by;
+  public int project_card_rank;
 
   // getter and setter:
   public String getName()
@@ -77,6 +78,14 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     return version;
   }
 
+  void setProjectCardRank(int rank) {
+    this.project_card_rank = rank;
+  }
+
+  int getProjectCardRank() {
+    return project_card_rank;
+  }
+
   public int compareTo(MingleCard that) {
     return Integer.valueOf(this.number).compareTo(Integer.valueOf(that.number));
   }
@@ -94,7 +103,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   // Constructor with all possible stuff
   public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by,
                      String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
-                     String tags, URL rendered_description) {
+                     String tags, URL rendered_description, int project_card_rank) {
     this.id = id;
     this.number = number;
     this.version = version;
@@ -108,6 +117,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     this.properties = properties;
     this.tags = tags;
     this.rendered_description = rendered_description;
+    this.project_card_rank = project_card_rank;
   }
   
 }

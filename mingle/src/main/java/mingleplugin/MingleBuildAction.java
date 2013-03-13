@@ -60,24 +60,31 @@ public class MingleBuildAction implements Action {
     return ids;
   }
 
+/**
+ * Returns all {@link MingleCard}s connected to the build.
+ */
+  public List<MingleCard> getCards() {
+    return Arrays.asList(cards);
+  }
+
+
 
 /**
  * Finds {@link MingleCard} whose ID matches the given one.
  */
-    public MingleCard getCard(int number) {
-        for (MingleCard card : cards) {
-            if(card.number == number)
-                return card;
-        }
-        return null;
+  public MingleCard getCard(int number) {
+    for (MingleCard card : cards) {
+      if(card.number == number)
+        return card;
     }
-
-    public void addCard(Set<MingleCard> cardToBeSaved) {
-        SortedSet<MingleCard> allCard = new TreeSet<MingleCard>();
-        allCard.addAll(cardToBeSaved);
-        allCard.addAll(Arrays.asList(this.cards));
-        
-        this.cards = allCard.toArray(new MingleCard[allCard.size()]);
-    }
+    return null;
+  }  
+  public void addCard(Set<MingleCard> cardToBeSaved) {
+    SortedSet<MingleCard> allCard = new TreeSet<MingleCard>();
+    allCard.addAll(cardToBeSaved);
+    allCard.addAll(Arrays.asList(this.cards));
+    
+    this.cards = allCard.toArray(new MingleCard[allCard.size()]);
+  }
 
 }

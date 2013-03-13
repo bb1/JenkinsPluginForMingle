@@ -28,7 +28,7 @@ public class MingleDescriptionSetter extends Recorder {
   @Override
   public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
   BuildListener listener) throws InterruptedException {
-    LOGGER.info("Started MingleDescriptionSetter");
+    LOGGER.info("Started MingleDescriptionSetter"); // NEVER HAPPEND!
 
     AbstractProject<?,?> project = build.getProject();
     MingleRestService service = MingleRestService.get(project);
