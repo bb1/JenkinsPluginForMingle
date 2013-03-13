@@ -274,6 +274,9 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     } catch (MalformedURLException e) {
       return null;
     }
+    
+    // This is a bug fix to avoid the xstream.mapper.CannotResolveClassException!
+    xstream.setClassLoader(MingleCard.class.getClassLoader());
 
     // convert XML to some kind of useful MingleCart or MingleSomething-object using XStream:
     MingleCard card = (MingleCard)xstream.fromXML(xml);
@@ -463,7 +466,6 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     catch (IOException e) {
       return "";
     }
-
     return resultString;
   }
 

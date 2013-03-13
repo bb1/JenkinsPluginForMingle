@@ -1,5 +1,7 @@
 package mingleplugin;
 
+import static org.junit.Assert.*;
+import org.junit.Test;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -39,16 +41,17 @@ import java.lang.IllegalStateException;
 /**
  * @author Birk Brauer
  */
-puclic class MingleRestServiceTest {
+public class MingleRestServiceTest {
   
-  @Overrides
+  //@Overrides
   private String doMingleCall(String url_s, String method, String xml) throws MalformedURLException {
     if (xml == null) {
       // used to get some information out of the server
       if (url_s.indexOf("card")) {
         // trying to get a card, mock the result, skip actually HTTP call:
         String result = ""
-        File file = new File("MingleXmlCard411.xml");
+        //File file = new File("MingleXmlCard411.xml");
+        File file = new File("MingleXmlMinimalisticCard.xml");
         
         try {
           Scanner scanner = new Scanner(file);
@@ -59,6 +62,6 @@ puclic class MingleRestServiceTest {
             e.printStackTrace();
         }
     	return result;
-    }//..
+    }
   }
 }
