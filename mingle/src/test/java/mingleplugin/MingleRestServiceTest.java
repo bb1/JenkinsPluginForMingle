@@ -59,6 +59,6 @@ puclic class MingleRestServiceTest {
             e.printStackTrace();
         }
     	return result;
-    }
+    }//..
   }
 }
