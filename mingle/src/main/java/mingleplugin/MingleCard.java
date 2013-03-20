@@ -6,6 +6,10 @@ import java.net.URL;
 import java.util.Date;
 import java.lang.Integer;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
   public String mingleObjectType = "MingleCard";
@@ -22,10 +26,13 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   public int id;
   public int number;
   public int version;
-  public Date created_on;
-  public Date modified_on;
   public MingleUser created_by;
   public int project_card_rank;
+  // the 2 Date-fields are Strings here to make XML parsing possible:
+  public String created_on;
+  private transient Date created_on_parsed;
+  public String modified_on;
+  private transient Date modified_on_parsed;
 
   // getter and setter:
   public String getName()
@@ -59,11 +66,15 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   }
 
   public Date getCreatedOn() {
-    return created_on;
+    if (created_on_parsed == null)
+      this.created_on_parsed = parseDateFromString(created_on);
+    return created_on_parsed;
   }
 
   public Date getModifiedOn() {
-    return modified_on;
+    if (modified_on_parsed == null)
+      this.modified_on_parsed = parseDateFromString(modified_on);
+    return modified_on_parsed;
   }
  
   int getNumber() {
@@ -91,7 +102,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   }
 
   // Constructor only with essential constants
-  public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by) {
+  public MingleCard (int id, int number, int version, String created_on, String modified_on, MingleUser created_by) {
     this.id = id;
     this.number = number;
     this.version = version;
@@ -101,7 +112,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   }
 
   // Constructor with all possible stuff
-  public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by,
+  public MingleCard (int id, int number, int version, String created_on, String modified_on, MingleUser created_by,
                      String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
                      String tags, URL rendered_description, int project_card_rank) {
     this.id = id;
@@ -119,5 +130,44 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     this.rendered_description = rendered_description;
     this.project_card_rank = project_card_rank;
   }
+
+  // Constructor with all possible stuff
+  public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by,
+                     String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
+                     String tags, URL rendered_description, int project_card_rank) {
+    this.id = id;
+    this.number = number;
+    this.version = version;
+    this.created_on_parsed = created_on;
+    this.modified_on = getStringFromDate(created_on);
+    this.modified_on_parsed = modified_on;
+    this.modified_on = getStringFromDate(modified_on);
+    this.created_by = created_by;
+    this.name = name;
+    this.description = description;
+    this.card_type = cardtype;
+    this.project = project;
+    this.properties = properties;
+    this.tags = tags;
+    this.rendered_description = rendered_description;
+    this.project_card_rank = project_card_rank;
+  }
+
+  private Date parseDateFromString(String dateString) {
+    // mingle uses the ISO 8601 date format:
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    Date date;
+    try {
+      date = formatter.parse(dateString);
+    } catch (ParseException e) {
+      return null;
+    }
+    return date;
+  }
   
+  private String getStringFromDate(Date date) {
+    // mingle uses the ISO 8601 date format:
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    return formatter.format(date);
+  }
 }

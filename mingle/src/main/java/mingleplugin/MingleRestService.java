@@ -34,7 +34,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
-
+import com.thoughtworks.xstream.converters.basic.DateConverter;
 /**
  * Class for the Mingle connection using the API v2.
  *
@@ -117,19 +117,17 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   @DataBoundConstructor
   public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
+    /* FOR SOME REASON XSTREAM IGNORE MY DATE SETTING.
+    //TODO: Make xstream work with custom DateConverters.
+    // mingle uses the ISO 8601 date format:
+    String iso8601 = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    String[] fallbackdateformats = {"yyyy-MM-dd HH:mm:ss.S z", "yyyy-MM-dd", "dd.MM.yyyy", "MM/dd/yyyy"};
+    //xstream.registerConverter(new DateConverter(iso8601, fallbackdateformats));
+    //xstream.registerConverter(new MingleDateConverter());*/
     xstream.alias("card", MingleCard.class);
-      xstream.omitField(MingleCard.class, "project_card_rank");
+      xstream.omitField(MingleCard.class, "project_card_rank"); // new feature added in mingle v13
       xstream.addImplicitArray(MingleCard.class, "properties", MingleCardProperty.class);
-      //TODO: Add converter for DATE!
-      xstream.omitField(MingleCard.class, "created_on");
-      xstream.omitField(MingleCard.class, "modified_on");
-      /* ignore these to isolate errors:
-      xstream.omitField(MingleCard.class, "version");
-      xstream.omitField(MingleCard.class, "properties");
-      xstream.omitField(MingleCard.class, "card_type");
-      xstream.omitField(MingleCard.class, "project");
-      xstream.omitField(MingleCard.class, "modified_by");
-      xstream.omitField(MingleCard.class, "created_by");*/
+      //xstream.useAttributeFor(Project.class, "projecturl");
     xstream.alias("property", MingleCardProperty.class);
     xstream.alias("project", MingleProject.class);
       xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
