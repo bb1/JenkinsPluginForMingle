@@ -287,16 +287,18 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     // This is a bug fix to avoid the xstream.mapper.CannotResolveClassException!
     xstream.setClassLoader(MingleCard.class.getClassLoader());
 
-    // convert XML to some kind of useful MingleCart or MingleSomething-object using XStream:
+    // convert XML to some kind of useful MingleCart using XStream:
+/* TO ISOLATE THE ERROR:
+    xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card>";
+    xml += "<number>"+number+"</number><name>CardName2</name><description>description</description>";
+    xml += "<card_type><name>Story</name></card_type><id type=\"integer\">409</id>";
+    xml += "<project><name>test project</name><identifier>test_project</identifier></project>";
+    xml += "<project_card_rank type=\"integer\">1</project_card_rank>";
+    xml += "<created_on type=\"datetime\">2009-10-14T09:14:54Z</created_on>";
+    xml += "</card>";*/
 
-    xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card><number>"+number+"</number><name>Name</name><description>description</description></card>";
-    //try {
-      MingleCard card = (MingleCard)xstream.fromXML(xml);
-      return card;
-    /*} catch (Exception e) {
-      LOGGER.log(Level.WARNING, "!!!!! "+e.getMessage());
-      return null;
-    }*/
+    MingleCard card = (MingleCard) xstream.fromXML(xml);
+    return card;
   }
 
 /**
