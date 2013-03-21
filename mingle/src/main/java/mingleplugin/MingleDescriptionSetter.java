@@ -33,31 +33,33 @@ public class MingleDescriptionSetter extends Recorder {
     AbstractProject<?,?> project = build.getProject();
     MingleRestService service = MingleRestService.get(project);
 
-    //TODO: getProjectActions() -> Returns action objects if THIS BUILDSTEP has actions to contribute to a Project. :/
-    MingleBuildAction action = (MingleBuildAction) getProjectActions(project);
-    List<Integer> cardIds = action.getCardIds();
-    Iterator<Integer> myListIterator = cardIds.iterator();
-    String newDescription = "__TEST__:</br>\n";
+    List<MingleBuildAction> actions = build.getActions(MingleBuildAction.class);
+    MingleBuildAction action;
 
-    while (myListIterator.hasNext()) {
-      int id = (int) myListIterator.next();
-      URL cardurl;
+    if (actions.size() > 0) action = (MingleBuildAction) actions.get(0);
+    else throw new InterruptedException("No cards in this build! "); // No MingleBuildAction = No Cards.
+
+    List<MingleCard> cards = action.getCards();
+    String newDescription = "<p>This build updates the following cards:</p>\n<ol>";
+
+    for (MingleCard card : cards) {
+      int id = card.getNumber();
+      URL url = null;
+      String name = card.getName();
       try {
-        cardurl = service.getCardUrl(id);
+        url = service.getCardUrl(id);
       } catch (MalformedURLException e) {
-        listener.getLogger().println("Couldn't get URL for Card " + id);
-        // skip the rest
-        continue;
+        LOGGER.log(Level.WARNING, "Couldn't get URL for Card " + id, e);
       }
-      //TODO: Card headline here
-      newDescription += "<a href=\""+cardurl.toString()+"\">#"+id+"</a><br/>\\n"; 
+      newDescription += "<li><a href=\""+url.toString()+"\">#"+id+"</a>: "+name+"</li>"; 
     }
+    newDescription += "</ul>";
     // 	result = build.getEnvironment(listener).expand(result);.
-    listener.getLogger().println("Description set: " + newDescription);
+    LOGGER.log(Level.WARNING, "Description set to: " + newDescription);
     try {
       build.setDescription(newDescription);
     } catch (IOException e) {
-      listener.getLogger().println("Couldn't set the build description!");
+      LOGGER.log(Level.WARNING,"Couldn't set the build description!");
     }
 
     //if anything goes wrong throw new AbortException()

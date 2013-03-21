@@ -79,6 +79,7 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         try {
           url = serv.getCardUrl(id);
         } catch (MalformedURLException e) {
+          LOGGER.log(Level.WARNING, "Couldn't get a valid URL:" + e);
           throw new AssertionError(e); // impossible
         }
         if(card==null) {
@@ -97,13 +98,6 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
         saveCards(build, a, cardToBeSaved);
     }
 
-    // Set the Build Description:
-    try {
-      setDescription(build, serv);
-    } catch (IOException e) {
-      LOGGER.log(Level.WARNING, "Error couldn't set description! " + e);
-    }
-
   }
 
 
@@ -120,33 +114,6 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
     } catch (final IOException e) {
       LOGGER.log(Level.WARNING, "Error saving updated build", e);
     }
-  }
-
-  private void setDescription(AbstractBuild<?, ?> build, MingleRestService service) throws IOException {
-    LOGGER.info("Started description stuff...");
-
-    List<MingleBuildAction> actions = build.getActions(MingleBuildAction.class);
-    MingleBuildAction action;
-
-    if (actions.size() > 0) action = actions.get(0);
-    else throw new IOException("No cards in this build!");
-
-    List<MingleCard> cards = action.getCards();
-    String newDescription = "<p>This build updates the following cards:</p>\n<ol>";
-
-    for (MingleCard card : cards) {
-      int id = card.getNumber();
-      URL url = null;
-      String name = card.getName();
-      try {
-        url = service.getCardUrl(id);
-      } catch (MalformedURLException e) {
-        LOGGER.log(Level.WARNING, "Couldn't get URL for Card " + id, e);
-      }
-      newDescription += "<li>"+name+"<a href=\""+url.toString()+"\">#"+id+"</a></li>\\n"; 
-    }
-    newDescription += "</ul>";
-    build.setDescription(newDescription);
   }
 
   MingleRestService getMingleServiceForProject(AbstractProject<?, ?> project) {

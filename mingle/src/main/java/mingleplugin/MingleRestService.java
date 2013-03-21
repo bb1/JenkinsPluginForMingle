@@ -33,7 +33,7 @@ import hudson.util.FormValidation;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 /**
  * Class for the Mingle connection using the API v2.
@@ -87,8 +87,8 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public final boolean supportsWikiStyleComment;
 
   // set up XStream to ignore fields that it don't know
-  XStream xstream = new XStream(new StaxDriver());/* {
-    @Override
+  private XStream xstream;
+  /* {  // new StaxDriver()
     protected MapperWrapper wrapMapper(MapperWrapper next) {
       return new MapperWrapper(next) {
         @Override
@@ -124,16 +124,23 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     String[] fallbackdateformats = {"yyyy-MM-dd HH:mm:ss.S z", "yyyy-MM-dd", "dd.MM.yyyy", "MM/dd/yyyy"};
     //xstream.registerConverter(new DateConverter(iso8601, fallbackdateformats));
     //xstream.registerConverter(new MingleDateConverter());*/
+
+    xstream = new XStream(new DomDriver());
     xstream.alias("card", MingleCard.class);
-      xstream.omitField(MingleCard.class, "project_card_rank"); // new feature added in mingle v13
+      xstream.omitField(MingleCard.class, "modified_by"); // Users won't work for some reason
+      xstream.omitField(MingleCard.class, "created_by"); // Users won't work for some reason
+      xstream.omitField(MingleCard.class, "properties"); // Users won't work for some reason
+      xstream.omitField(MingleCard.class, "card_type"); // Users won't work for some reason
       xstream.addImplicitArray(MingleCard.class, "properties", MingleCardProperty.class);
       //xstream.useAttributeFor(Project.class, "projecturl");
     xstream.alias("property", MingleCardProperty.class);
     xstream.alias("project", MingleProject.class);
+    xstream.alias("project", MingleProject.class);
       xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
+    //TODO: created_by and modified_by is for some reason not parsed as user -.-
     xstream.alias("created_by", MingleUser.class);
     xstream.alias("modified_by", MingleUser.class);
-    // ...
+    // TODO: *_by --> is not connected to a user -.-
     xstream.alias("user", MingleUser.class);
 
     if(!url.toExternalForm().endsWith("/")) {
@@ -281,8 +288,15 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.setClassLoader(MingleCard.class.getClassLoader());
 
     // convert XML to some kind of useful MingleCart or MingleSomething-object using XStream:
-    MingleCard card = (MingleCard)xstream.fromXML(xml);
-    return card;
+
+    xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card><number>"+number+"</number><name>Name</name><description>description</description></card>";
+    //try {
+      MingleCard card = (MingleCard)xstream.fromXML(xml);
+      return card;
+    /*} catch (Exception e) {
+      LOGGER.log(Level.WARNING, "!!!!! "+e.getMessage());
+      return null;
+    }*/
   }
 
 /**

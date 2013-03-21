@@ -6,9 +6,9 @@ import java.net.URL;
 import java.util.Date;
 import java.lang.Integer;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import com.thoughtworks.xstream.annotations.*;
 
 class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
@@ -19,6 +19,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   public String card_type;
   
   public MingleProject project;
+  @XStreamOmitField
   public MingleCardProperty[] properties;
   public String tags; // comma-delimited list of tags
   public URL rendered_description; // Resource; Link to rendered card description as HTML.
@@ -26,12 +27,17 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   public int id;
   public int number;
   public int version;
+  @XStreamOmitField
   public MingleUser created_by;
+  @XStreamOmitField
+  public MingleUser modified_by;
   public int project_card_rank;
   // the 2 Date-fields are Strings here to make XML parsing possible:
   public String created_on;
+  @XStreamOmitField
   private transient Date created_on_parsed;
   public String modified_on;
+  @XStreamOmitField
   private transient Date modified_on_parsed;
 
   // getter and setter:
@@ -99,6 +105,13 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
 
   public int compareTo(MingleCard that) {
     return Integer.valueOf(this.number).compareTo(Integer.valueOf(that.number));
+  }
+
+  // Constructor only with essential constants
+  public MingleCard (String name, String description, int number) {
+    this.name = name;
+    this.description = description;
+    this.number = number;
   }
 
   // Constructor only with essential constants
