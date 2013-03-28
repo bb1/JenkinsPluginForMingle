@@ -129,9 +129,10 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.alias("card", MingleCard.class);
       xstream.omitField(MingleCard.class, "modified_by"); // Users won't work for some reason
       xstream.omitField(MingleCard.class, "created_by"); // Users won't work for some reason
-      xstream.omitField(MingleCard.class, "properties"); // Users won't work for some reason
+      //xstream.omitField(MingleCard.class, "properties"); // Users won't work for some reason
       xstream.omitField(MingleCard.class, "card_type"); // Users won't work for some reason
       xstream.addImplicitArray(MingleCard.class, "properties", MingleCardProperty.class);
+      xstream.addImplicitArray(MingleCard.class, "property", MingleCardProperty.class);
       //xstream.useAttributeFor(Project.class, "projecturl");
     xstream.alias("property", MingleCardProperty.class);
     xstream.alias("project", MingleProject.class);
@@ -142,6 +143,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.alias("modified_by", MingleUser.class);
     // TODO: *_by --> is not connected to a user -.-
     xstream.alias("user", MingleUser.class);
+    //xstream.ignoreUnknownElements(); doesn't exists anymore.
 
     if(!url.toExternalForm().endsWith("/")) {
       try { 
@@ -288,14 +290,20 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.setClassLoader(MingleCard.class.getClassLoader());
 
     // convert XML to some kind of useful MingleCart using XStream:
-/* TO ISOLATE THE ERROR:
+// TO ISOLATE THE ERROR:
     xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card>";
-    xml += "<number>"+number+"</number><name>CardName2</name><description>description</description>";
+    xml += "<number>"+number+"</number><name>CardName</name><description>description</description>";
     xml += "<card_type><name>Story</name></card_type><id type=\"integer\">409</id>";
     xml += "<project><name>test project</name><identifier>test_project</identifier></project>";
     xml += "<project_card_rank type=\"integer\">1</project_card_rank>";
     xml += "<created_on type=\"datetime\">2009-10-14T09:14:54Z</created_on>";
-    xml += "</card>";*/
+    xml += "<properties type=\"array\">";
+    xml += "<property type_description=\"Managed text list\" hidden=\"false\">";
+    xml += "  <name>Status</name>";
+    xml += "  <value>Accepted</value>";
+    xml += "</property>";
+    xml += "</properties>";
+    xml += "</card>";
 
     MingleCard card = (MingleCard) xstream.fromXML(xml);
     return card;
