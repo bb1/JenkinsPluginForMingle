@@ -22,8 +22,11 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   @XStreamOmitField
   public MingleCardProperty[] properties;
   public String tags; // comma-delimited list of tags
-  public URL rendered_description; // Resource; Link to rendered card description as HTML.
+
+  //TODO: rendered_description should be a URL but it's value is always empty in the xml it's set inside an attribute. We need a converter for that.
+  // Resource; Link to rendered card description as HTML.
   // read only, must be set inside the constructor and can't be changed:
+  public String rendered_description;
   public int id;
   public int number;
   public int version;
@@ -127,7 +130,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   // Constructor with all possible stuff
   public MingleCard (int id, int number, int version, String created_on, String modified_on, MingleUser created_by,
                      String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
-                     String tags, URL rendered_description, int project_card_rank) {
+                     String tags, String rendered_description, int project_card_rank) {
     this.id = id;
     this.number = number;
     this.version = version;
@@ -147,7 +150,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
   // Constructor with all possible stuff
   public MingleCard (int id, int number, int version, Date created_on, Date modified_on, MingleUser created_by,
                      String name, String description, String cardtype, MingleProject project, MingleCardProperty[] properties, 
-                     String tags, URL rendered_description, int project_card_rank) {
+                     String tags, String rendered_description, int project_card_rank) {
     this.id = id;
     this.number = number;
     this.version = version;

@@ -130,7 +130,10 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
     MingleBuildAction action;
 
     if (actions.size() > 0) action = (MingleBuildAction) actions.get(0);
-    else throw new IOException("No cards in this build!"); // No MingleBuildAction = No Cards.
+    else {
+      build.setDescription("No cards in this build!");
+      throw new IOException("No cards in this build!"); // No MingleBuildAction = No Cards.
+    }
 
     List<MingleCard> cards = action.getCards();
     String newDescription = "<p style=\"font-weight:bold;\">This build updates the following cards:</p>\n<ol>";

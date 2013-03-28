@@ -131,10 +131,11 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
       xstream.omitField(MingleCard.class, "created_by"); // Users won't work for some reason
       //xstream.omitField(MingleCard.class, "properties"); // Users won't work for some reason
       xstream.omitField(MingleCard.class, "card_type"); // Users won't work for some reason
-      xstream.addImplicitArray(MingleCard.class, "properties", MingleCardProperty.class);
-      xstream.addImplicitArray(MingleCard.class, "property", MingleCardProperty.class);
+      xstream.addImplicitArray(MingleCard.class, "properties");
       //xstream.useAttributeFor(Project.class, "projecturl");
+      xstream.aliasAttribute(MingleCardProperty.class, "type_description", "type_description");
     xstream.alias("property", MingleCardProperty.class);
+      xstream.aliasAttribute(MingleCardProperty.class, "type_description", "type_description");
     xstream.alias("project", MingleProject.class);
     xstream.alias("project", MingleProject.class);
       xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
@@ -290,7 +291,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.setClassLoader(MingleCard.class.getClassLoader());
 
     // convert XML to some kind of useful MingleCart using XStream:
-// TO ISOLATE THE ERROR:
+/*/ TO ISOLATE THE ERROR:
     xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card>";
     xml += "<number>"+number+"</number><name>CardName</name><description>description</description>";
     xml += "<card_type><name>Story</name></card_type><id type=\"integer\">409</id>";
@@ -303,7 +304,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xml += "  <value>Accepted</value>";
     xml += "</property>";
     xml += "</properties>";
-    xml += "</card>";
+    xml += "</card>";*/
 
     MingleCard card = (MingleCard) xstream.fromXML(xml);
     return card;

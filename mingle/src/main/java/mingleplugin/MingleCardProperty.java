@@ -6,6 +6,8 @@ package mingleplugin;
 // is always String. The property also includes attributes about the property type_description
 // and whether or not it is hidden.
 
+//TODO: the value must be a Object arcording to the type_desscription. It's a bit ugly to parse but a real DATE value would give a lot of benefit.
+
 import java.util.Arrays;
 
 class MingleCardProperty extends MingleObject{
@@ -13,7 +15,10 @@ class MingleCardProperty extends MingleObject{
   private String mingleObjectType = "MingleCardProperty";
 
   private String name;
-  private Object value;
+  private String value;
+  //private transient Object value_object;
+
+  // possible values: Managed text list, Allow any text, Managed number list, Allow any number, Automatically generated from the team list, Date, Formula, Card
   private String type_description;
   private boolean hidden;
 
@@ -27,18 +32,12 @@ class MingleCardProperty extends MingleObject{
     this.name = name;
   }
 
-  public Object getValue() {
+  public String getValue() {
     return value;
   }
 
-  public void setValue( Object obj ) {
-    // checks for valid data types. incomplete!
-    // TODO: complete checks
-    if (obj instanceof String || obj instanceof String || 
-        obj instanceof Integer || obj instanceof Object[]
-        ) {
-      this.value = obj;
-    }
+  public void setValue( String obj ) {
+    this.value = obj;
   }
 
   public String getTypeDescription()
@@ -62,20 +61,20 @@ class MingleCardProperty extends MingleObject{
   }
 
   // The attributes hidden and type_description are optional
-  MingleCardProperty(String name, Object value, String type_description, boolean hidden) {
+  MingleCardProperty(String name, String value, String type_description, boolean hidden) {
     this.name = name;
     this.value = value;
     this.type_description = type_description;
     this.hidden = hidden;
   }
 
-  MingleCardProperty(String name, Object value, boolean hidden) {
+  MingleCardProperty(String name, String value, boolean hidden) {
     this.name = name;
     this.value = value;
     this.hidden = hidden;
   }
 
-  MingleCardProperty(String name, Object value) {
+  MingleCardProperty(String name, String value) {
     this.name = name;
     this.value = value;
   }
