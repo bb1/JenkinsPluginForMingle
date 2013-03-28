@@ -33,6 +33,7 @@ import hudson.util.FormValidation;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import com.thoughtworks.xstream.*;
+import com.thoughtworks.xstream.*;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.converters.basic.DateConverter;
 /**
@@ -87,7 +88,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public final boolean supportsWikiStyleComment;
 
   // set up XStream to ignore fields that it don't know
-  private XStream xstream;
+  private XStream xstream = new XStream(new DomDriver());
 
   /**
    * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
@@ -105,21 +106,21 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
     // XSTREAM SETTINGS:
-    xstream = new XStream(new DomDriver());
+    
 
     /*** [DATE SETTINGS] FOR SOME REASON XSTREAM IGNORES ALL THIS:
     //TODO: Make xstream work with custom DateConverters. And change the date-type-fields in the MingleCard back to date.
     // mingle uses the ISO 8601 date format:
     String iso8601 = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     String[] fallbackdateformats = {"yyyy-MM-dd HH:mm:ss.S z", "yyyy-MM-dd", "dd.MM.yyyy", "MM/dd/yyyy"};
-    //xstream.registerConverter(new DateConverter(iso8601, fallbackdateformats));
+    xstream.registerConverter(new DateConverter(iso8601, fallbackdateformats));
     //xstream.registerConverter(new MingleDateConverter());
     xstream.alias("created_on", Date.class);
     xstream.alias("modified_on", Date.class);
     [/DATE SETTINGS]***/
 
     xstream.alias("card", MingleCard.class);
-      xstream.addImplicitArray(MingleCard.class, "properties");
+      xstream.addImplicitArray(MingleCard.class, "properties", "properties");
     xstream.alias("property", MingleCardProperty.class);
       xstream.aliasAttribute(MingleCardProperty.class, "type_description", "type_description");
     xstream.alias("project", MingleProject.class);
@@ -594,6 +595,7 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
         if (url == null) {// URL not entered yet
           return FormValidation.error("No URL given");
         }
+        
         MingleRestService serv = new MingleRestService(new URL(url), userName, password, null, null, false);
 
         project = project.replaceAll("\\W", "_").toLowerCase();
