@@ -2,10 +2,7 @@ package mingleplugin;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
-//import java.util.GregorianCalendar;
 import java.text.ParseException;
-//import java.util.Calendar;
-//import java.util.GregorianCalendar;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -16,6 +13,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Converts string dates in ISO 8601 format to Java and back.
+ */
 public class MingleDateConverter implements Converter {
   private static final Logger LOGGER = Logger.getLogger(MingleDateConverter.class.getName());
 

@@ -88,19 +88,6 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
 
   // set up XStream to ignore fields that it don't know
   private XStream xstream;
-  /* {  // new StaxDriver()
-    protected MapperWrapper wrapMapper(MapperWrapper next) {
-      return new MapperWrapper(next) {
-        @Override
-        public boolean shouldSerializeMember(Class definedIn, String fieldName) {
-          if (definedIn == Object.class) {
-            return false;
-          }
-          return super.shouldSerializeMember(definedIn, fieldName);
-        }
-      };
-    }
-  };*/
 
   /**
    * conected mingle card... saved HERE?? Or inside the MingleBuildAction?
@@ -117,34 +104,30 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
   @DataBoundConstructor
   public MingleRestService(URL url, String userName, String password, String project, String userPattern, boolean supportsWikiStyleComment) {
 
-    /* FOR SOME REASON XSTREAM IGNORE MY DATE SETTING.
-    //TODO: Make xstream work with custom DateConverters.
+    // XSTREAM SETTINGS:
+    xstream = new XStream(new DomDriver());
+
+    /*** [DATE SETTINGS] FOR SOME REASON XSTREAM IGNORES ALL THIS:
+    //TODO: Make xstream work with custom DateConverters. And change the date-type-fields in the MingleCard back to date.
     // mingle uses the ISO 8601 date format:
     String iso8601 = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     String[] fallbackdateformats = {"yyyy-MM-dd HH:mm:ss.S z", "yyyy-MM-dd", "dd.MM.yyyy", "MM/dd/yyyy"};
     //xstream.registerConverter(new DateConverter(iso8601, fallbackdateformats));
-    //xstream.registerConverter(new MingleDateConverter());*/
+    //xstream.registerConverter(new MingleDateConverter());
+    xstream.alias("created_on", Date.class);
+    xstream.alias("modified_on", Date.class);
+    [/DATE SETTINGS]***/
 
-    xstream = new XStream(new DomDriver());
     xstream.alias("card", MingleCard.class);
-      xstream.omitField(MingleCard.class, "modified_by"); // Users won't work for some reason
-      xstream.omitField(MingleCard.class, "created_by"); // Users won't work for some reason
-      //xstream.omitField(MingleCard.class, "properties"); // Users won't work for some reason
-      xstream.omitField(MingleCard.class, "card_type"); // Users won't work for some reason
       xstream.addImplicitArray(MingleCard.class, "properties");
-      //xstream.useAttributeFor(Project.class, "projecturl");
-      xstream.aliasAttribute(MingleCardProperty.class, "type_description", "type_description");
     xstream.alias("property", MingleCardProperty.class);
       xstream.aliasAttribute(MingleCardProperty.class, "type_description", "type_description");
     xstream.alias("project", MingleProject.class);
-    xstream.alias("project", MingleProject.class);
       xstream.addImplicitArray(MingleProject.class, "keywords", "keyword");
-    //TODO: created_by and modified_by is for some reason not parsed as user -.-
     xstream.alias("created_by", MingleUser.class);
     xstream.alias("modified_by", MingleUser.class);
-    // TODO: *_by --> is not connected to a user -.-
     xstream.alias("user", MingleUser.class);
-    //xstream.ignoreUnknownElements(); doesn't exists anymore.
+    //xstream.ignoreUnknownElements(); doesn't exists anymore. This was here to avoid a crash when mingle updates and adds new field like from v12 to v13 with the new "project_card_rank".
 
     if(!url.toExternalForm().endsWith("/")) {
       try { 
@@ -291,21 +274,6 @@ public class MingleRestService extends AbstractDescribableImpl<MingleRestService
     xstream.setClassLoader(MingleCard.class.getClassLoader());
 
     // convert XML to some kind of useful MingleCart using XStream:
-/*/ TO ISOLATE THE ERROR:
-    xml =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?><card>";
-    xml += "<number>"+number+"</number><name>CardName</name><description>description</description>";
-    xml += "<card_type><name>Story</name></card_type><id type=\"integer\">409</id>";
-    xml += "<project><name>test project</name><identifier>test_project</identifier></project>";
-    xml += "<project_card_rank type=\"integer\">1</project_card_rank>";
-    xml += "<created_on type=\"datetime\">2009-10-14T09:14:54Z</created_on>";
-    xml += "<properties type=\"array\">";
-    xml += "<property type_description=\"Managed text list\" hidden=\"false\">";
-    xml += "  <name>Status</name>";
-    xml += "  <value>Accepted</value>";
-    xml += "</property>";
-    xml += "</properties>";
-    xml += "</card>";*/
-
     MingleCard card = (MingleCard) xstream.fromXML(xml);
     return card;
   }

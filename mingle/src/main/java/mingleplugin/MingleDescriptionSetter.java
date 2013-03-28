@@ -22,6 +22,10 @@ import hudson.tasks.Recorder;
 import hudson.scm.ChangeLogAnnotator;
 import hudson.scm.ChangeLogSet.Entry;
 
+/**
+ * A {@link Recorder} Set the desciption for the build as a list of all conected mingle cards.
+ */
+//TODO: This class is never called! It's extention point is obviously totally useless. :/ 
 public class MingleDescriptionSetter extends Recorder {
   private static final Logger LOGGER = Logger.getLogger(MingleChangeLogAnnotator.class.getName());
 

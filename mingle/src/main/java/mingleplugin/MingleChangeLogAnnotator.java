@@ -123,6 +123,11 @@ public class MingleChangeLogAnnotator extends ChangeLogAnnotator {
     }
   }
 
+
+/**
+ * Setting the description for the current build arcording to the connected cards.
+ * TODO: This will be called in every single line of the changelog :C -> move all this logic to {@link MingleDescriptionSetter} and call it once after the annotation.
+ */
   private void setDescription(AbstractBuild<?, ?> build, MingleRestService service) throws IOException {
     LOGGER.info("Started description stuff...");
 

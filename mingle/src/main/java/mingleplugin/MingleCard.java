@@ -117,7 +117,7 @@ class MingleCard extends MingleObject implements Comparable<MingleCard> {
     this.number = number;
   }
 
-  // Constructor only with essential constants
+  // Constructor with a bit more stuff
   public MingleCard (int id, int number, int version, String created_on, String modified_on, MingleUser created_by) {
     this.id = id;
     this.number = number;
